@@ -38,6 +38,12 @@ end
 activate :relative_assets
 set :relative_links, true
 
+#activate :deploy do |deploy|
+#  deploy.method = :git
+#  deploy.remote = 'https://github.com/sv001196/iaas.git'
+#  deploy.branch = 'master'
+#end
+
 # Build Configuration
 configure :build do
   activate :asset_hash
