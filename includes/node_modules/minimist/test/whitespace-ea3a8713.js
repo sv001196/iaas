@@ -1,0 +1,1 @@
+var parse=require("../"),test=require("tape");test("whitespace should be whitespace",function(e){e.plan(1);var t=parse(["-x","\t"]).x;e.equal(t,"\t")});
