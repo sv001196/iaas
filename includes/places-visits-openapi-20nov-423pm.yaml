@@ -1,0 +1,1120 @@
+openapi: 3.0.0
+info:
+  title: Places API
+  description: |-
+    Places API returns detailed information about the location of interest. A location of interest is represented by one of specific point co-ordinates (i.e longitude and latitude) or a bounded region (i.e polygon) or a  more complex polygon structure depicting interior and exterior edges.
+    PlacesAPI provides APIs to fetch the location of interest by passing various search criterion.
+  contact:
+    email: api@trufactor.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0-oas3
+servers:
+- url: /
+paths:
+  /places:
+    get:
+      summary: Returns the details of one or more places
+      description: |
+        Pass one or more comma separated place ids to fetch the details of the places. A single request can return up to 50 place objects.
+      operationId: place_ids
+      parameters:
+      - name: x-api-key
+        in: header
+        description: Pass the API key
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: ids
+        in: query
+        description: Comma separated list of place ids. Up to 50 place ids can be
+          passed. If this parameter is not specified, all the places available in
+          the system will be returned in a paginated manner. To limit the number of
+          places returned per request, specify the query parameter "limit".
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Limits the number of place objects returned per request. This
+          parameter is used only when ids parameter is not specified in the request.
+          If this parameter is not specified, the API will return 50 place objects
+          per request.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          default: 50
+      responses:
+        200:
+          description: Response object containing list of matching place details if
+            the request is successful.
+          headers:
+            Credits:
+              description: An unique TruFactor request ID per API request. Use this
+                for debugging and tracking credit consumption.
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                place_example:
+                  $ref: '#/components/examples/place_example'
+        400:
+          description: Bad input parameter. When one of the passed ids is in invalid
+            format (e.g in non UUID format) or when the ids are not sent at all, the
+            server will respond with HTTP 400 status code. Also, if the query parameters
+            "start", "end" are invalid, the request will be rejected with HTTP status
+            code 400.
+          headers:
+            X-Request-ID:
+              $ref: '#/components/responses/200Okay/headers/X-Request-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        401:
+          description: API key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              style: simple
+              explode: false
+              schema:
+                type: string
+  /places/search:
+    get:
+      summary: Searches for the places by the name, business, categories, any of the
+        address fields (city, county, zip) and the geographical co-ordinates.
+      description: Seaches the places by name of the places, names of the businesses,
+        categories of the places, address fields and the geographical co-ordinates.
+      operationId: search_places
+      parameters:
+      - name: x-api-key
+        in: header
+        description: Pass the API key
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Search by name of the place. This search parameter is typically
+          used to search the prominent places of interests. The returned response
+          will contain results based on partial and exact match. To toggle off partial
+          match, set the query parameter "exact-match" to 1.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Plaza
+      - name: text
+        in: query
+        description: Free form text input to search on any of the supported attributes
+          of the place e.g Name, City, State, Zip, Name of the business
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Louisburg Square
+      - name: categories
+        in: query
+        description: Comma separated list of categories of the places.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example:
+        - Shopping Malls
+        - Restaurants
+      - name: location_type
+        in: query
+        description: Defines how the location information about the place is passed
+          to the server. The API accepts one of - "place_id", an identifier of the
+          place (refer /places/ API for the details) - "point", an array of longitude
+          and latitude representing a point, typically the center point of the location
+          of interest. Specify the query parameter "location.radius" to restrict the
+          radius of the look up for locations of interest. - "polygon" an array of
+          longitude and latitude tuples representing a bounded region
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - place_id
+          - point
+          - polygon
+      - name: location
+        in: query
+        description: An object representing geographical information associated with
+          a location of interest. This can be represented by a simple TruFactor place
+          ID or a center point the location or a bounded region or by conventional
+          geo name attributes (e.g city, state).
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: radius
+        in: query
+        description: Filters the places falling within the bounded radius.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          format: float
+      - name: boundary
+        in: query
+        description: Filters the places falling within the bounded polygon.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/boundary'
+      - name: business.name
+        in: query
+        description: Filters the search result matching the name of the specified
+          business
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: city
+        in: query
+        description: Full form city name. This field can be used in tandem with other
+          query parameters such as "name", "text" to narrow down the search results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Boston
+      - name: state
+        in: query
+        description: Full form state name. This field can be used in tandem with other
+          query parameters such as "name", "text" to narrow down the search results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Massachusetts
+      - name: zip_code
+        in: query
+        description: Comma separated list of zip codes. This field can be used in
+          tandem with other query parameters such as "name", "text" to narrow down
+          the search results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: county
+        in: query
+        description: Comma separated list of counties. This field can be used in tandem
+          with other query parameters such as "name", "text" to narrow down the search
+          results.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: Suffolk
+      - name: limit
+        in: query
+        description: Limits the number of place objects returned per request. If limit
+          is not specified, the API will return 50 place objects
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          default: 50
+      - name: exact_match
+        in: query
+        description: Set this parameter to 1 when you want to disable partial match
+          in fields such as "name", "business.name", "city", "county", "state", "zip_code"
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          format: int32
+      responses:
+        200:
+          description: list of matching place details
+          headers:
+            Credits:
+              $ref: '#/components/responses/200Okay/headers/Credits'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                place_example:
+                  $ref: '#/components/examples/place_example'
+        400:
+          description: Bad input parameter. When one of the passed ids is in invalid
+            format (e.g in non UUID format) or when the ids are not sent at all, the
+            server will respond with HTTP 400 status code. Also, if the query parameters
+            "start", "end" are invalid, the request will be rejected with HTTP status
+            code 400.
+          headers:
+            X-Request-ID:
+              $ref: '#/components/responses/200Okay/headers/X-Request-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        401:
+          description: API key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              style: simple
+              explode: false
+              schema:
+                type: string
+  /visits/summary:
+    get:
+      summary: Returns the aggregated count of visitors and unique visitors that visited
+        the given place of interests.
+      description: Computes and returns the aggregated count of visitors and unique
+        visitors that visited the given place of interest. Place of interest can be
+        one or more TruFactor place id or a location co-ordinate of the place or a
+        bounded region or a polygon.
+      parameters:
+      - name: x-api-key
+        in: header
+        description: Pass the API key
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: location_type
+        in: query
+        description: Defines how the location information about the place is passed
+          to the server. The API accepts one of - "place_id", an identifier of the
+          place (refer /places/ API for the details) - "point", an array of longitude
+          and latitude representing a point, typically the center point of the location
+          of interest. Specify the query parameter "location.radius" to restrict the
+          radius of the look up for locations of interest. - "polygon" an array of
+          longitude and latitude tuples representing a bounded region
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - place_id
+          - point
+          - polygon
+      - name: location
+        in: query
+        description: An object representing geographical information associated with
+          a location of interest. This can be represented by a simple TruFactor place
+          ID or a center point the location or a bounded region or by conventional
+          geo name attributes (e.g city, state).
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: business_id
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          description: Filter the query result by passing ID of the business. Use
+            this parameter to fetch the results filtered by business e.g Get the results
+            filtered by business id of 'Walmart'. See /businesses/ API to understand
+            the attributes of the entity "Business".
+      - name: category_ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          description: Filter the query result by passing array of TruFactor category
+            IDs of the places. Use this parameter to fetch the results filtered by
+            categories, for example, "Shopping Malls", "Restaurants".
+          example:
+          - 1a9875f0-eed9-41f0-b81a-789dc5bc3aea
+          - 5d807c25-4d7e-4c37-bb86-d6c60acfd2c7
+          items:
+            type: string
+      - name: start
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          description: Start time in epoch timestamp. This parameter is optional.
+            The timestamp should be specified in millisecond. If left unspecified,
+            the default start time is applied. The valid start time stamp should be
+            greater than start of current day minus 395 days (roughly current date
+            minus 13 months).
+          format: int64
+      - name: end
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          description: End time in epoch timestamp. This parameter is optional. The
+            timestamp should be specified in millisecond. If left unspecified, start
+            time of the current day is applied.
+          format: int64
+      responses:
+        200:
+          description: Response object. Typically, the status of the request is returned
+            in HTTP status code. If the request is successful, the response object
+            will contain "result" object. If the request did not succeed, the response
+            will contain "error" object which will in turn contain the error code,
+            message description and detailed description of the error for debugging.
+          headers:
+            Credits:
+              $ref: '#/components/responses/200Okay/headers/Credits'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+        400:
+          description: Bad input parameter. When the passed place_id is in invalid
+            format (e.g in non UUID format) or when the place_id is not sent at all,
+            the server will respond with HTTP 400 status code. Also, if the query
+            parameters "start", "end" are invalid, the request will be rejected with
+            HTTP status code 400.
+          headers:
+            RequestId:
+              $ref: '#/components/responses/200Okay/headers/X-Request-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        401:
+          description: Unauthorized access
+          headers:
+            RequestId:
+              $ref: '#/components/responses/200Okay/headers/X-Request-ID'
+        429:
+          description: Raised when too many requests have been sent.
+          headers:
+            RequestId:
+              $ref: '#/components/responses/200Okay/headers/X-Request-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+  /visits/physical_store_summary:
+    get:
+      summary: Returns the 25th Percentile, 50th Percentile, 75th Percentile and 90th
+        Percentile user and visit counts for the passed stores.
+      description: Returns the 25th Percentile, 50th Percentile, 75th Percentile and
+        90th Percentile user and visit counts for the passed stores. The location
+        of the store can specified in the form of one or more TruFactor place id or
+        a location co-ordinate of the place or a bounded region or a polygon.
+      parameters:
+      - name: x-api-key
+        in: header
+        description: Pass the API key
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: location_type
+        in: query
+        description: Defines how the location information about the place is passed
+          to the server. The API accepts one of - "place_id", an identifier of the
+          place (refer /places/ API for the details) - "point", an array of longitude
+          and latitude representing a point, typically the center point of the location
+          of interest. Specify the query parameter "location.radius" to restrict the
+          radius of the look up for locations of interest. - "polygon" an array of
+          longitude and latitude tuples representing a bounded region
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          enum:
+          - place_id
+          - point
+          - polygon
+      - name: location
+        in: query
+        description: An object representing geographical information associated with
+          a location of interest. This can be represented by a simple TruFactor place
+          ID or a center point the location or a bounded region or by conventional
+          geo name attributes (e.g city, state).
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: business_id
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          description: Filter the query result by passing ID of the business. Use
+            this parameter to fetch the results filtered by business e.g Get the results
+            filtered by business id of 'Walmart'. See /businesses/ API to understand
+            the attributes of the entity "Business".
+      - name: category_ids
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          description: Filter the query result by passing array of TruFactor category
+            IDs of the places. Use this parameter to fetch the results filtered by
+            categories, for example, "Shopping Malls", "Restaurants".
+          example:
+          - 1a9875f0-eed9-41f0-b81a-789dc5bc3aea
+          - 5d807c25-4d7e-4c37-bb86-d6c60acfd2c7
+          items:
+            type: string
+      - name: start
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          description: Start time in epoch timestamp. This parameter is optional.
+            The timestamp should be specified in millisecond. If left unspecified,
+            the default start time is applied. The valid start time stamp should be
+            greater than start of current day minus 395 days (roughly current date
+            minus 13 months).
+          format: int64
+      - name: end
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          description: End time in epoch timestamp. This parameter is optional. The
+            timestamp should be specified in millisecond. If left unspecified, start
+            time of the current day is applied.
+          format: int64
+      responses:
+        200:
+          description: list of insights as specified in the results parameter
+          headers:
+            Credits:
+              $ref: '#/components/responses/200Okay/headers/Credits'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+        400:
+          description: Bad input parameter. When the passed place_id is in invalid
+            format (e.g in non UUID format) or when the place_id is not sent at all,
+            the server will respond with HTTP 400 status code. Also, if the query
+            parameters "start", "end" are invalid, the request will be rejected with
+            HTTP status code 400.
+          headers:
+            RequestId:
+              $ref: '#/components/responses/200Okay/headers/X-Request-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+        401:
+          description: API key is missing or invalid
+          headers:
+            WWW_Authenticate:
+              style: simple
+              explode: false
+              schema:
+                type: string
+        429:
+          description: Raised when too many requests have been sent.
+          headers:
+            RequestId:
+              $ref: '#/components/responses/200Okay/headers/X-Request-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+components:
+  schemas:
+    Place:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: An unique Trufactor place identifier
+          format: uuid
+          example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        name:
+          type: string
+          description: Name of the place
+          example: Louvre musuem
+        parent_place_id:
+          type: string
+          description: Reference to parent Trufactor place identifier. This attribute
+            is available when a place is contained within an another place. For example,
+            a restaurant within a shopping mall.
+          format: uuid
+        brands:
+          type: array
+          description: List of brands that this place is associated with.
+          items:
+            $ref: '#/components/schemas/Place_brands'
+        business:
+          $ref: '#/components/schemas/Place_business'
+        categories:
+          type: array
+          description: The Trufactor categories associated with this place
+          items:
+            $ref: '#/components/schemas/Place_categories'
+        contact:
+          $ref: '#/components/schemas/Contact'
+        address:
+          $ref: '#/components/schemas/Address'
+        geo:
+          $ref: '#/components/schemas/Geo'
+    Contact:
+      type: object
+      properties:
+        phone:
+          type: array
+          description: List of phone numbers
+          example:
+          - +14153622004
+          - +14153622005
+          items:
+            type: string
+        mobile:
+          type: string
+          description: List of mobile numbers
+          example: '["+14153622004","+14153622005"]'
+        email:
+          type: array
+          description: List of email addresses
+          format: email
+          example:
+          - hello@example.com
+          - feedback@example.com
+          items:
+            type: string
+        www:
+          type: array
+          description: List of web sites
+          format: uri
+          items:
+            type: string
+            example: '["https://www.example.com"]'
+      description: Object representing various contact attributes such as phone, mobile
+        and email addresses.
+    Address:
+      type: object
+      properties:
+        country_code:
+          type: string
+          description: Two or three digit short codes as defined in ISO 3166-1, 2
+            or 3 letter code, https://en.wikipedia.org/wiki/ISO_3166-1
+          example: US
+        country:
+          type: string
+          description: Full form country name
+          example: USA, United States of America
+        state_code:
+          type: string
+          description: Two or three digit short codes as defined in ISO 3166-2 https://en.wikipedia.org/wiki/ISO_3166-2
+          example: Tx
+        state:
+          type: string
+          description: Full form state name
+          example: Texas
+        county:
+          type: string
+          description: Full form county name
+          example: Travis
+        city:
+          type: string
+          description: Name of the city
+          example: Austin
+        zip_code:
+          type: string
+          description: Usually contains 5-8 digit numerical values
+          example: "78701"
+        steet_address:
+          type: string
+          description: Well formatted multi line stree addresses
+          example: 2100, Barton Springs Rd
+        locality:
+          type: string
+          description: Officially recognised area within county or city
+          example: South Austin
+        neighbourhood:
+          type: string
+          description: Collaquially known area withing country or city or district
+          example: Barton Creek
+      description: Object representing various address attributes of the place such
+        as street, county, city, state and country.
+    Geo:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Supported values are "point" and "polygon"
+          enum:
+          - point
+          - polygon
+        coordinates:
+          type: object
+          description: Either a point represented by an array of longitude and latitude
+            or a bounded region represented by an array of longitude and latitude
+            array
+          oneOf:
+          - $ref: '#/components/schemas/Point'
+          - $ref: '#/components/schemas/Polygon'
+      description: Object representing a point or a bounded region (i.e Polygon)
+    Point:
+      type: array
+      items:
+        type: number
+        description: Describes longitude and latitude
+        format: float
+    Polygon:
+      type: array
+      description: Describes a polygon i.e a list of longitude and latitude co-ordinates
+        representing a bounded region
+      example:
+      - - 55.2796
+        - 25.1988
+      - - 52.2796
+        - 22.1988
+      items:
+        type: array
+        description: Describes longitude and latitude
+        items:
+          type: number
+          format: float
+    inline_response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Place'
+        next:
+          type: string
+          description: URL pointing to the next page of results.
+          example: http:/api.trufactor.co/places/search/?request-id=3953400a-a934-4b4b-8d3c-f8faa5a97bda&limit=50&offset=2
+    inline_response_400_error:
+      required:
+      - code
+      - description
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: e3526
+        message:
+          type: string
+          description: Error message
+          example: Invalid input parameter
+        description:
+          type: string
+          description: Detailed description of the error for debugging purposes.
+          example: Unsupported character(s) :) detected in input parameter "ids"
+        doc_link:
+          type: string
+          description: URL pointing to documentation describing the error
+          example: http://doc.trufactor.com/error/e3526.html
+      description: Response will contain this field only when HTTP status code is
+        400.
+    inline_response_400:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/inline_response_400_error'
+    boundary:
+      type: object
+      properties:
+        coordinates:
+          type: array
+          items:
+            type: number
+            format: float
+    inline_response_200_1_data_summary:
+      type: object
+      properties:
+        visits_count:
+          type: number
+          description: Total number of visitors that visited the place
+          example: 302140
+        unique_users_count:
+          type: number
+          description: Total number of unique visitors that visited the place
+          example: 132445
+    inline_response_200_1_data_extrapolated_summary_error_metrics:
+      type: object
+      properties:
+        visits_count:
+          type: number
+          description: Error metric in percentage while extrapolating the total number
+            of visitors count
+          example: 1.3
+        unique_users_count:
+          type: number
+          description: Error metric in percentage while extrapolating the total number
+            of unique visitors count
+          example: 0.9
+    inline_response_200_1_data_extrapolated_summary:
+      type: object
+      properties:
+        visits_count:
+          type: number
+          description: Extrapolated total number of visitors who visited the place
+          example: 6002140
+        unique_users_count:
+          type: number
+          description: Extrapolated total number of unique vistors who visited the
+            place
+          example: 121254
+        error_metrics:
+          $ref: '#/components/schemas/inline_response_200_1_data_extrapolated_summary_error_metrics'
+    inline_response_200_1_data:
+      type: object
+      properties:
+        summary:
+          $ref: '#/components/schemas/inline_response_200_1_data_summary'
+        extrapolated_summary:
+          $ref: '#/components/schemas/inline_response_200_1_data_extrapolated_summary'
+    inline_response_200_1:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_1_data'
+    inline_response_200_2_data:
+      type: object
+      properties:
+        percentile:
+          type: number
+          format: int64
+          example: 25
+          enum:
+          - 25
+          - 50
+          - 75
+          - 90
+        visits_count:
+          type: number
+          description: Total number of users that visited the place falling in to
+            the percentile
+          example: 2933
+        unique_users_count:
+          type: number
+          description: Total number of unique users that visited the place falling
+            in to the percentile
+          example: 1023
+    inline_response_200_2:
+      type: object
+      properties:
+        data:
+          type: array
+          example:
+          - percentile: 25
+            visits_count: 2933
+            unique_users_count: 1023
+          - percentile: 50
+            visits_count: 3432
+            unique_users_count: 809
+          - percentile: 75
+            visits_count: 234
+            unique_users_count: 92
+          items:
+            $ref: '#/components/schemas/inline_response_200_2_data'
+    Place_brands:
+      properties:
+        id:
+          type: string
+          description: An unique TruFactor identifier of the brand
+          example: 59b6675b-660f-44c3-93e7-1c031758fb15
+        name:
+          type: string
+          description: Name of the brand
+          example: Toyota
+        link:
+          type: string
+          description: Hypermedia link to fetch the details of the brand
+          example: https://api.trufactor.com/brands/59b6675b-660f-44c3-93e7-1c031758fb15
+    Place_business:
+      type: object
+      properties:
+        id:
+          type: string
+          description: An unique Trufactor identifier of the business
+          format: uuid
+          example: eb3698d4-a27c-4d93-9f48-fb4355c0e63c
+        name:
+          type: string
+          description: Name of the business
+          example: McDonalds
+        link:
+          type: string
+          description: Hypermedia link to fetch the details of the business
+          format: uri
+          example: https://api.trufactor.com/businesses/eb3698d4-a27c-4d93-9f48-fb4355c0e63c
+      description: The business that own this place or a tenant operating out of this
+        place
+    Place_categories:
+      type: object
+      properties:
+        id:
+          type: string
+          description: An unique Trufactor identifier of the caetegory
+          format: uuid
+          example: 152f84ff-1f88-4e04-a406-d1bd4358105b
+        name:
+          type: string
+          description: Name of the category
+          example: Shopping mall
+        link:
+          type: string
+          description: Hypermedia link to fetch the details of the category
+          format: url
+          example: https://api.trufactor.com/categories/eb3698d4-a27c-4d93-9f48-fb4355c0e63c
+  responses:
+    200Okay:
+      description: sdsds
+      headers:
+        X-Request-ID:
+          description: An unique TruFactor request ID per API request. Use this for
+            debugging and tracking credit consumption.
+          style: simple
+          explode: false
+          schema:
+            type: string
+        Credits:
+          description: An unique TruFactor request ID per API request. Use this for
+            debugging and tracking credit consumption.
+          style: simple
+          explode: false
+          schema:
+            type: string
+        X-Credits-Consumed:
+          description: Number of TruFactor credits consumed in this API request.
+          style: simple
+          explode: false
+          schema:
+            type: number
+            format: int32
+    standardError:
+      description: Bad input parameter. When the passed place_id is in invalid format
+        (e.g in non UUID format) or when the place_id is not sent at all, the server
+        will respond with HTTP 400 status code. Also, if the query parameters "start",
+        "end" are invalid, the request will be rejected with HTTP status code 400.
+      headers:
+        RequestId:
+          $ref: '#/components/responses/200Okay/headers/X-Request-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_400'
+    rateLimitingError:
+      description: Raised when too many requests have been sent.
+      headers:
+        RequestId:
+          $ref: '#/components/responses/200Okay/headers/X-Request-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_400'
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          style: simple
+          explode: false
+          schema:
+            type: string
+  parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Limits the number of returned results
+      required: false
+      style: form
+      explode: true
+      schema:
+        multipleOf: 10
+        minimum: 10
+        type: integer
+        format: int32
+        default: 10
+    xApiKey:
+      name: x-api-key
+      in: header
+      description: Pass the API key
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    locationType:
+      name: location_type
+      in: query
+      description: Defines how the location information about the place is passed
+        to the server. The API accepts one of - "place_id", an identifier of the place
+        (refer /places/ API for the details) - "point", an array of longitude and
+        latitude representing a point, typically the center point of the location
+        of interest. Specify the query parameter "location.radius" to restrict the
+        radius of the look up for locations of interest. - "polygon" an array of longitude
+        and latitude tuples representing a bounded region
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        enum:
+        - place_id
+        - point
+        - polygon
+    location:
+      name: location
+      in: query
+      description: An object representing geographical information associated with
+        a location of interest. This can be represented by a simple TruFactor place
+        ID or a center point the location or a bounded region or by conventional geo
+        name attributes (e.g city, state).
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+    business_id:
+      name: business_id
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        description: Filter the query result by passing ID of the business. Use this
+          parameter to fetch the results filtered by business e.g Get the results
+          filtered by business id of 'Walmart'. See /businesses/ API to understand
+          the attributes of the entity "Business".
+    category_ids:
+      name: category_ids
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        description: Filter the query result by passing array of TruFactor category
+          IDs of the places. Use this parameter to fetch the results filtered by categories,
+          for example, "Shopping Malls", "Restaurants".
+        example:
+        - 1a9875f0-eed9-41f0-b81a-789dc5bc3aea
+        - 5d807c25-4d7e-4c37-bb86-d6c60acfd2c7
+        items:
+          type: string
+    start:
+      name: start
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: number
+        description: Start time in epoch timestamp. This parameter is optional. The
+          timestamp should be specified in millisecond. If left unspecified, the default
+          start time is applied. The valid start time stamp should be greater than
+          start of current day minus 395 days (roughly current date minus 13 months).
+        format: int64
+    end:
+      name: end
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: number
+        description: End time in epoch timestamp. This parameter is optional. The
+          timestamp should be specified in millisecond. If left unspecified, start
+          time of the current day is applied.
+        format: int64
+    place_id:
+      name: place_id
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+    geo:
+      name: geo
+      in: query
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: object
+        properties:
+          location:
+            type: array
+            items:
+              type: number
+              format: float
+  examples:
+    place_example:
+      value:
+        id: d290f1ee-6c54-4b01-90e6-d701748f0851
+        name: Louvre musuem
+        categories:
+        - id: d290f1ee-6c54-4b01-90e6-d701748f0851
+          name: Arts & Entertainment
+          link: https://api.trufactor.com/categories/d290f1ee-6c54-4b01-90e6-d701748f0851
+        contact:
+          email:
+          - ticket@louvre.fr
+        address:
+          country_code: FR
+          country: France
+          county: 1st arrondissement
+          city: Paris
+          zip_code: 75001
+          steet_address: Rue de Rivoli, 75001
+        geo:
+          location:
+            longitude: 48.51
+            latitude: 2.2
