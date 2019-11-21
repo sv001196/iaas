@@ -1,0 +1,165 @@
+swagger: '2.0'
+info:
+  description: Places API returns information about a place(s) of interest.
+  version: 1.0.0
+  title: Places API
+  # put the contact info for your development or API team
+  contact:
+    email: api@trufactor.io
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: developers
+  description: Operations available to regular developers
+
+paths:
+  /places:
+    get:
+      tags:
+      - developers
+      summary: returns the details of one or more places 
+      operationId: place_ids
+      description: |
+        Pass one or more comma separated place ids to fetch the details of the places. A single request can return details up to 50 places.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: ids
+        description: comma separated list of place ids. Up to 50 place ids can be passed. If this parameter is not specified, all the places available in the system shall be returned in a paginated manner. To limit the number of places returned per request, specify limit and offset in the query parameters.
+        required: true
+        type: string
+        
+      - in: query
+        name: limit
+        description: Limits the number of place objects returned per request. This parameter is used only when ids parameter is not specified in the request. If limit is not specified, the API will return 50 place objects
+        required: false
+        type: number
+        default: 50
+      
+      responses:
+        200:
+          description: list of place objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Place'
+        400:
+          description: bad input parameter
+    post:
+      tags:
+      - admins
+      summary: adds an inventory item
+      operationId: addInventory
+      description: Adds an item to the system
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: inventoryItem
+        description: Inventory item to add
+        schema:
+          $ref: '#/definitions/InventoryItem'
+      responses:
+        201:
+          description: item created
+        400:
+          description: invalid input, object invalid
+        409:
+          description: an existing item already exists
+          
+  /places/search:
+    get:
+      tags:
+      - developers
+      summary: returns the details of one or more places 
+      operationId: search_places
+      description: |
+        Pass one or more comma separated place ids to fetch the details of the places. A single request can return details up to 50 places.
+      produces:
+      - application/json
+      parameters:
+      - in: query
+        name: ids
+        description: comma separated list of place ids. Up to 50 place ids can be passed. If this parameter is not specified, all the places available in the system shall be returned in a paginated manner. To limit the number of places returned per request, specify limit and offset in the query parameters.
+        required: true
+        type: string
+        
+      - in: query
+        name: limit
+        description: Limits the number of place objects returned per request. This parameter is used only when ids parameter is not specified in the request. If this parameter is not specified, the API will return 50 place objects
+        required: false
+        type: number
+        default: 50
+      
+      responses:
+        200:
+          description: list of place objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Place'
+        400:
+          description: bad input parameter
+    
+definitions:
+  Place:
+    type: object
+    required:
+    - id
+    - name
+    - status
+    - parent_place_id
+    - brand_ids
+    - categories
+    - contact
+    - address
+    - geo
+    - parking
+    
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+        
+      name:
+        type: string
+        example: Shopper's stop
+        description: Human understandable display name
+      status:
+        type: string
+        example: Possible values are public, waiting_for_approval, archived
+      parent_place_id:
+        type: string
+        example: 
+      brand_ids:
+        type: string
+        example: 
+      categories:
+        type: string
+        example: 
+      contact:
+        type: string
+        example: 
+      address:
+        type: string
+        example:
+      geo:
+        type: string
+        example:
+      parking:
+        type: string
+        example:
+
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /sv001196/visits/1.0.0
+schemes:
+ - https
