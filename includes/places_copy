@@ -1,0 +1,156 @@
+<h1 id='introduction'>Introduction</h1>
+<p>Places API returns information about a place(s) of interest. </p>
+
+<p><strong>Version:</strong> 1.0.0 </p>
+<h1 id='places'>/PLACES</h1><h2 id='get'><strong><em>GET</em></strong></h2>
+<p><strong>Summary:</strong> returns the details of one or more places</p>
+
+<p><strong>Description:</strong> Pass one or more comma separated place ids to fetch the details of the places. A single request can return details up to 50 places.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>***GET*** /places</code> </p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ids</td>
+<td>query</td>
+<td>comma separated list of place ids. Up to 50 place ids can be passed. If this parameter is not specified, all the places available in the system shall be returned in a paginated manner. To limit the number of places returned per request, specify limit and offset in the query parameters.</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>query</td>
+<td>Limits the number of place objects returned per request. This parameter is used only when ids parameter is not specified in the request. If limit is not specified, the API will return 50 place objects</td>
+<td>No</td>
+<td>number</td>
+</tr>
+</tbody></table>
+
+<p><strong>Responses</strong></p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>list of place objects</td>
+</tr>
+<tr>
+<td>400</td>
+<td>bad input parameter</td>
+</tr>
+</tbody></table>
+<h2 id='post'><strong><em>POST</em></strong></h2>
+<p><strong>Summary:</strong> adds an inventory item</p>
+
+<p><strong>Description:</strong> Adds an item to the system</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>***POST*** /places</code> </p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>inventoryItem</td>
+<td>body</td>
+<td>Inventory item to add</td>
+<td>No</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p><strong>Responses</strong></p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>item created</td>
+</tr>
+<tr>
+<td>400</td>
+<td>invalid input, object invalid</td>
+</tr>
+<tr>
+<td>409</td>
+<td>an existing item already exists</td>
+</tr>
+</tbody></table>
+<h1 id='places-search'>/PLACES/SEARCH</h1><h2 id='get-2'><strong><em>GET</em></strong></h2>
+<p><strong>Summary:</strong> returns the details of one or more places</p>
+
+<p><strong>Description:</strong> Pass one or more comma separated place ids to fetch the details of the places. A single request can return details up to 50 places.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>***GET*** /places/search</code> </p>
+
+<p><strong>Parameters</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Located in</th>
+<th>Description</th>
+<th>Required</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ids</td>
+<td>query</td>
+<td>comma separated list of place ids. Up to 50 place ids can be passed. If this parameter is not specified, all the places available in the system shall be returned in a paginated manner. To limit the number of places returned per request, specify limit and offset in the query parameters.</td>
+<td>Yes</td>
+<td>string</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>query</td>
+<td>Limits the number of place objects returned per request. This parameter is used only when ids parameter is not specified in the request. If this parameter is not specified, the API will return 50 place objects</td>
+<td>No</td>
+<td>number</td>
+</tr>
+</tbody></table>
+
+<p><strong>Responses</strong></p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>list of place objects</td>
+</tr>
+<tr>
+<td>400</td>
+<td>bad input parameter</td>
+</tr>
+</tbody></table>
+
+<!-- Converted with the swagger-to-slate https://github.com/lavkumarv/swagger-to-slate -->
