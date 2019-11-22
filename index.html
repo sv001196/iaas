@@ -428,7 +428,16 @@ You must replace <code>API_KEY</code> with your personal API key.
 
 <p>The body is the request body string or omitted if there is no request body (typically for GET requests).</p>
 <h1 id='response-processing'>Response Processing</h1>
-<p><Content goes here></p>
+<p>TruFactor returns the status of an API request in the HTTP status code. The response body is in JSON format. In case of successfully processed HTTP request, based on the invoked API, there will typically be a <strong>&quot;data&quot;</strong> parameter which will either be an object or array of objects. If the response is paginated, there wil be an additional parameter &quot;next&quot; that points to an URL to fetch the next set of results.</p>
+
+<p>In case of failed requests, the request body will contain a parameter named <strong>&quot;error&quot;</strong> which will contain the error code, message and a detailed description of the error.</p>
+
+<p>A typical response will contain following headers:</p>
+
+<ul>
+<li>X-RequestID - Unique TruFactor request ID for tracking</li>
+<li>Credits - Number of credits spent to execute the API call</li>
+</ul>
 
 <h1 id="places-api">Places API</h1>
 
