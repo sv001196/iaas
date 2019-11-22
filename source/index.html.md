@@ -84,7 +84,14 @@ The body is the request body string or omitted if there is no request body (typi
 
 # Response Processing
 
-<Content goes here>
+TruFactor returns the status of an API request in the HTTP status code. The response body is in JSON format. In case of successfully processed HTTP request, based on the invoked API, there will typically be a **"data"** parameter which will either be an object or array of objects. If the response is paginated, there wil be an additional parameter "next" that points to an URL to fetch the next set of results.
+
+In case of failed requests, the request body will contain a parameter named **"error"** which will contain the error code, message and a detailed description of the error.
+
+A typical response will contain following headers:
+
+- X-RequestID - Unique TruFactor request ID for tracking
+- Credits - Number of credits spent to execute the API call
 
 <h1 id="places-api">Places API</h1>
 
