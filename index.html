@@ -267,9 +267,6 @@
                   <li>
                     <a href="#tocSOn_Failure" class="toc-h2 toc-link" data-title="On Failure">On Failure</a>
                   </li>
-                  <li>
-                    <a href="#tocSinline_response_400" class="toc-h2 toc-link" data-title="On Failure">On Failure</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -350,16 +347,16 @@
                     <a href="#tocSplace_categories" class="toc-h2 toc-link" data-title="Categories">Categories</a>
                   </li>
                   <li>
-                    <a href="#tocSinline_response_200_1_data_summary" class="toc-h2 toc-link" data-title="Visits Summary Data">Visits Summary Data</a>
+                    <a href="#tocSinline_response_200_1_data_summary" class="toc-h2 toc-link" data-title="Summary Data">Summary Data</a>
                   </li>
                   <li>
-                    <a href="#tocSinline_response_200_1_data_extrapolated_summary_error_metrics" class="toc-h2 toc-link" data-title="Extrapolated Summary Data">Extrapolated Summary Data</a>
+                    <a href="#tocSinline_response_200_1_data_extrapolated_summary_error_metrics" class="toc-h2 toc-link" data-title="Extrapolated Summary Error Metrics">Extrapolated Summary Error Metrics</a>
                   </li>
                   <li>
-                    <a href="#tocSinline_response_200_1_data_extrapolated_summary" class="toc-h2 toc-link" data-title="inline_response_200_1_data_extrapolated_summary">inline_response_200_1_data_extrapolated_summary</a>
+                    <a href="#tocSinline_response_200_1_data_extrapolated_summary" class="toc-h2 toc-link" data-title="Extrapolated Summary">Extrapolated Summary</a>
                   </li>
                   <li>
-                    <a href="#tocSinline_response_200_1_data" class="toc-h2 toc-link" data-title="inline_response_200_1_data">inline_response_200_1_data</a>
+                    <a href="#tocSinline_response_200_1_data" class="toc-h2 toc-link" data-title="Summary Data">Summary Data</a>
                   </li>
                   <li>
                     <a href="#tocSinline_response_200_1" class="toc-h2 toc-link" data-title="inline_response_200_1">inline_response_200_1</a>
@@ -436,7 +433,7 @@ You must replace <code>API_KEY</code> with your personal API key.
 
 <ul>
 <li>X-RequestID - Unique TruFactor request ID for tracking</li>
-<li>X-Credits - Number of credits spent to execute the API call</li>
+<li>X-CREDITS - Number of credits spent to execute the API call</li>
 </ul>
 
 <h1 id="places-api">Places API</h1>
@@ -456,18 +453,18 @@ PlacesAPI provides APIs to fetch the location of interest by passing various sea
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /places <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/places</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -486,7 +483,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/places'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -514,11 +511,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>ids</td>
@@ -542,34 +539,42 @@ x-api-key: string
 <p>Response object containing list of matching place details if the request is successful.</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d290f1ee-6c54-4b01-90e6-d701748f0851"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Louvre musuem"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d290f1ee-6c54-4b01-90e6-d701748f0851"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Arts &amp; Entertainment"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/categories/d290f1ee-6c54-4b01-90e6-d701748f0851"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"ticket@louvre.fr"</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FR"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1st arrondissement"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">75001</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"steet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rue de Rivoli, 75001"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"geo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">48.51</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.2</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d290f1ee-6c54-4b01-90e6-d701748f0851"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Louvre musuem"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d290f1ee-6c54-4b01-90e6-d701748f0851"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Arts &amp; Entertainment"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/categories/d290f1ee-6c54-4b01-90e6-d701748f0851"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"ticket@louvre.fr"</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FR"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"France"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1st arrondissement"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paris"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">75001</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"steet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rue de Rivoli, 75001"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"geo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"longitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">48.51</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"latitude"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.2</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+
+  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http:/api.trufactor.co/places/search/?request-id=3953400a-a934-4b4b-8d3c-f8faa5a97bda&amp;limit=50&amp;offset=2"</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -625,14 +630,14 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 <tr>
 <td>400</td>
-<td>X-Request-ID</td>
+<td>X-REQUEST-ID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -642,7 +647,7 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 </tbody></table>
 
@@ -652,6 +657,10 @@ This operation does not require authentication
 </aside>
 -->
 <h2 id='search-places'>Search Places</h2>
+<p><em>Searches for the places by the name, business, categories, any of the address fields (city, county, zip) and the geographical co-ordinates.</em></p>
+
+<p>Seaches the places by name of the places, names of the businesses, categories of the places, address fields and the geographical co-ordinates.</p>
+
 <p><a id="opIdsearch_places"></a></p>
 
 <blockquote>
@@ -660,18 +669,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /places/search <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/places/search</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -690,7 +699,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/places/search'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -699,79 +708,7 @@ x-api-key: string
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
-</code></pre><h3 id='response-data'>Response Data</h3>
-<h2 id="tocSOn_Success">On Success</h2>
-
-<p><a id="schemaOn_Success"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d290f1ee-6c54-4b01-90e6-d701748f0851"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Louvre musuem"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"parent_place_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"brands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"59b6675b-660f-44c3-93e7-1c031758fb15"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Toyota"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/brands/59b6675b-660f-44c3-93e7-1c031758fb15"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"McDonalds"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/businesses/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"152f84ff-1f88-4e04-a406-d1bd4358105b"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shopping mall"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/categories/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="mi">14153622004</span><span class="p">,</span><span class="w">
-          </span><span class="mi">14153622005</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"mobile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[</span><span class="se">\"</span><span class="s2">+14153622004</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">+14153622005</span><span class="se">\"</span><span class="s2">]"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"hello@example.com"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"feedback@example.com"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"www"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"[</span><span class="se">\"</span><span class="s2">https://www.example.com</span><span class="se">\"</span><span class="s2">]"</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA, United States of America"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"state_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tx"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Texas"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travis"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Austin"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78701"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"steet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2100, Barton Springs Rd"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"locality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"South Austin"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"neighbourhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barton Creek"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="s2">"geo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"point"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="mi">0</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http:/api.trufactor.co/places/search/?request-id=3953400a-a934-4b4b-8d3c-f8faa5a97bda&amp;limit=50&amp;offset=2"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-<p><code>GET /places/search</code></p>
-
-<p><em>Searches for the places by the name, business, categories, any of the address fields (city, county, zip) and the geographical co-ordinates.</em></p>
-
-<p>Seaches the places by name of the places, names of the businesses, categories of the places, address fields and the geographical co-ordinates.</p>
-
+</code></pre>
 <h3 id="search_places-parameters">Parameters</h3>
 
 <table><thead>
@@ -784,11 +721,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>name</td>
@@ -889,27 +826,73 @@ x-api-key: string
 <td>Set this parameter to 1 when you want to disable partial match in fields such as &quot;name&quot;, &quot;business.name&quot;, &quot;city&quot;, &quot;county&quot;, &quot;state&quot;, &quot;zip_code&quot;</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>location_type</td>
-<td>place_id</td>
-</tr>
-<tr>
-<td>location_type</td>
-<td>point</td>
-</tr>
-<tr>
-<td>location_type</td>
-<td>polygon</td>
-</tr>
-</tbody></table>
+<h3 id='response-data'>Response Data</h3>
+<h2 id="tocSOn_Success">On Success</h2>
 
+<p><a id="schemaOn_Success"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d290f1ee-6c54-4b01-90e6-d701748f0851"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Louvre musuem"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"parent_place_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"brands"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"59b6675b-660f-44c3-93e7-1c031758fb15"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Toyota"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/brands/59b6675b-660f-44c3-93e7-1c031758fb15"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"business"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"McDonalds"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/businesses/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"152f84ff-1f88-4e04-a406-d1bd4358105b"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shopping mall"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/categories/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"contact"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">14153622004</span><span class="p">,</span><span class="w">
+          </span><span class="mi">14153622005</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"mobile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[</span><span class="se">\"</span><span class="s2">+14153622004</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">+14153622005</span><span class="se">\"</span><span class="s2">]"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"hello@example.com"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"feedback@example.com"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"www"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"[</span><span class="se">\"</span><span class="s2">https://www.example.com</span><span class="se">\"</span><span class="s2">]"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USA, United States of America"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tx"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Texas"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"county"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Travis"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Austin"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"zip_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78701"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"steet_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2100, Barton Springs Rd"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"locality"</span><span class="p">:</span><span class="w"> </span><span class="s2">"South Austin"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"neighbourhood"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barton Creek"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"geo"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"point"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">0</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http:/api.trufactor.co/places/search/?request-id=3953400a-a934-4b4b-8d3c-f8faa5a97bda&amp;limit=50&amp;offset=2"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
 <blockquote>
 <p>Example responses</p>
 
@@ -978,7 +961,7 @@ x-api-key: string
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
 <td>Bad input parameter. When one of the passed ids is in invalid format (e.g in non UUID format) or when the ids are not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters &quot;start&quot;, &quot;end&quot; are invalid, the request will be rejected with HTTP status code 400.</td>
-<td><a href="#schemainline_response_400">On Failure</a></td>
+<td><a href="#tocSOn_Failure">On Failure</a></td>
 </tr>
 <tr>
 <td>401</td>
@@ -999,14 +982,14 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 <tr>
 <td>400</td>
-<td>X-Request-ID</td>
+<td>X-REQUEST-ID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -1016,7 +999,7 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 </tbody></table>
 
@@ -1052,8 +1035,6 @@ This operation does not require authentication
 </tbody></table>
 
 <h2 id="tocSOn_Failure">On Failure</h2>
-
-<p><a id="schemaOn_Failure"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e3526"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid input parameter"</span><span class="p">,</span><span class="w">
@@ -1103,8 +1084,6 @@ This operation does not require authentication
 </tr>
 </tbody></table>
 
-<h2 id="tocSinline_response_400">On Failure</h2>
-
 <p><a id="schemainline_response_400"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -1130,18 +1109,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/summary <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/summary</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -1160,7 +1139,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/summary'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -1188,11 +1167,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -1213,31 +1192,31 @@ x-api-key: string
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>none</td>
+<td>Unique TruFactor ID identifying a business</td>
 </tr>
 <tr>
 <td>category_ids</td>
 <td>query</td>
 <td>array[string]</td>
 <td>false</td>
-<td>none</td>
+<td>List of TruFactor category IDs</td>
 </tr>
 <tr>
 <td>start</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-2'>Enumerated Values</h4>
+<h4 id='enumerated-values'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1294,7 +1273,7 @@ x-api-key: string
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>Response object. Typically, the status of the request is returned in HTTP status code. If the request is successful, the response object will contain &quot;result&quot; object. If the request did not succeed, the response will contain &quot;error&quot; object which will in turn contain the error code, message description and detailed description of the error for debugging.</td>
-<td><a href="#schemainline_response_200_1">inline_response_200_1</a></td>
+<td><a href="#schemainline_response_200_1">On Success</a></td>
 </tr>
 <tr>
 <td>400</td>
@@ -1327,7 +1306,7 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -1355,9 +1334,11 @@ x-api-key: string
 </tr>
 </tbody></table>
 
+<!--
 <aside class="success">
 This operation does not require authentication
 </aside>
+-->
 <h2 id='visits-store-summary'>Visits Store Summary</h2>
 <blockquote>
 <p>Code samples</p>
@@ -1365,18 +1346,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/physical_store_summary <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/physical_store_summary</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -1395,7 +1376,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/physical_store_summary'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -1423,11 +1404,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -1448,31 +1429,31 @@ x-api-key: string
 <td>query</td>
 <td>string</td>
 <td>false</td>
-<td>none</td>
+<td>Unique TruFactor ID identifying the business</td>
 </tr>
 <tr>
 <td>category_ids</td>
 <td>query</td>
 <td>array[string]</td>
 <td>false</td>
-<td>none</td>
+<td>List of TruFactor category IDs</td>
 </tr>
 <tr>
 <td>start</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-3'>Enumerated Values</h4>
+<h4 id='enumerated-values-2'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1565,7 +1546,7 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -1582,7 +1563,7 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
@@ -1593,9 +1574,9 @@ x-api-key: string
 </tr>
 </tbody></table>
 
-<aside class="success">
+<!--<aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h2 id='top-stores-by-visits'>Top Stores By Visits</h2>
 <blockquote>
 <p>Code samples</p>
@@ -1603,18 +1584,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/top_stores <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/top_stores</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -1633,7 +1614,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/top_stores'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -1661,11 +1642,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>place_ids</td>
@@ -1717,7 +1698,7 @@ x-api-key: string
 <td>Number of top or bottom stores to fetch. If unspecified, the default value is 25. Per request, 25 result data set is returned. Refer &quot;next&quot; parameter in the response body to fetch the next set of results.</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-4'>Enumerated Values</h4>
+<h4 id='enumerated-values-3'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -1820,7 +1801,7 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -1837,7 +1818,7 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
@@ -1848,9 +1829,10 @@ x-api-key: string
 </tr>
 </tbody></table>
 
+<!--
 <aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h2 id='visits-by-demography'>Visits By Demography</h2>
 <blockquote>
 <p>Code samples</p>
@@ -1858,18 +1840,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/demography <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/demography</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -1888,7 +1870,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/demography'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -1916,11 +1898,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -1941,17 +1923,17 @@ x-api-key: string
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-5'>Enumerated Values</h4>
+<h4 id='enumerated-values-4'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2121,14 +2103,14 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 <tr>
 <td>400</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -2138,20 +2120,21 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 </tbody></table>
 
+<!--
 <aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h2 id='app-insights-summary'>App Insights Summary</h2>
 <blockquote>
 <p>Code samples</p>
@@ -2159,18 +2142,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/app_insights_summary <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/app_insights_summary</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -2191,7 +2174,7 @@ x-api-key: string
 import requests
 headers = {
   'Accept': 'application/json',
-  'x-api-key': 'string'
+  'X-API-KEY': 'string'
 }
 
 r = requests.get('/visits/app_insights_summary', params={
@@ -2219,11 +2202,11 @@ print r.json()
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -2244,17 +2227,17 @@ print r.json()
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-6'>Enumerated Values</h4>
+<h4 id='enumerated-values-5'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2368,14 +2351,14 @@ print r.json()
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 <tr>
 <td>400</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -2385,20 +2368,21 @@ print r.json()
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 </tbody></table>
 
+<!--
 <aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h2 id='mobile-web-insights-summary'>Mobile Web Insights Summary</h2>
 <blockquote>
 <p>Code samples</p>
@@ -2406,18 +2390,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/web_insights_summary <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/web_insights_summary</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -2436,7 +2420,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/web_insights_summary'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -2464,11 +2448,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -2489,17 +2473,17 @@ x-api-key: string
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-7'>Enumerated Values</h4>
+<h4 id='enumerated-values-6'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2601,14 +2585,14 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 <tr>
 <td>400</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -2618,20 +2602,21 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 </tbody></table>
 
+<!--
 <aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h2 id='area-summary'>Area Summary</h2>
 <blockquote>
 <p>Code samples</p>
@@ -2639,18 +2624,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/area_summary <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/area_summary</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -2669,7 +2654,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/area_summary'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -2697,11 +2682,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -2722,17 +2707,17 @@ x-api-key: string
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-8'>Enumerated Values</h4>
+<h4 id='enumerated-values-7'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2807,14 +2792,14 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 <tr>
 <td>400</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -2824,20 +2809,21 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 </tbody></table>
 
+<!--
 <aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h2 id='activities-summary'>Activities Summary</h2>
 <blockquote>
 <p>Code samples</p>
@@ -2845,18 +2831,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/activities <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/activities</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -2875,7 +2861,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/activities'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -2903,11 +2889,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -2928,17 +2914,17 @@ x-api-key: string
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-9'>Enumerated Values</h4>
+<h4 id='enumerated-values-8'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3114,14 +3100,14 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 <tr>
 <td>400</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -3131,20 +3117,21 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 </tbody></table>
 
+<!--
 <aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h2 id='places-insights'>Places Insights</h2>
 <blockquote>
 <p>Code samples</p>
@@ -3152,18 +3139,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/places <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/places</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -3182,7 +3169,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/places'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -3210,11 +3197,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -3235,17 +3222,17 @@ x-api-key: string
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-10'>Enumerated Values</h4>
+<h4 id='enumerated-values-9'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3353,14 +3340,14 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
-<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
+<td>Value indicating the number of credits consumed to serve the request</td>
 </tr>
 <tr>
 <td>400</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -3370,20 +3357,21 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
 </tr>
 </tbody></table>
 
+<!--
 <aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h2 id='physical-journey'>Physical Journey</h2>
 <blockquote>
 <p>Code samples</p>
@@ -3391,18 +3379,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/journeys/physical <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/journeys/physical</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -3421,7 +3409,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/journeys/physical'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -3449,11 +3437,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -3474,17 +3462,17 @@ x-api-key: string
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-11'>Enumerated Values</h4>
+<h4 id='enumerated-values-10'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3598,14 +3586,14 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
-<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
+<td>Value indicating the number of credits consumed to serve the request</td>
 </tr>
 <tr>
 <td>400</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
 <td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
@@ -3615,20 +3603,21 @@ x-api-key: string
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
-<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
+<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption</td>
 </tr>
 </tbody></table>
 
+<!--
 <aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h2 id='digital-journey'>Digital Journey</h2>
 <blockquote>
 <p>Code samples</p>
@@ -3636,18 +3625,18 @@ This operation does not require authentication
 <pre class="highlight shell tab-shell"><code><span class="c"># You can also use wget</span>
 curl -X GET /visits/journeys/digital <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
-  -H <span class="s1">'x-api-key: string'</span>
+  -H <span class="s1">'X-API-KEY: string'</span>
 
 </code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/visits/journeys/digital</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
-x-api-key: string
+X-API-KEY: string
 
 </code></pre><pre class="highlight javascript tab-javascript--nodejs"><code><span class="kr">const</span> <span class="nx">fetch</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'node-fetch'</span><span class="p">);</span>
 
 <span class="kr">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">'Accept'</span><span class="p">:</span><span class="s1">'application/json'</span><span class="p">,</span>
-  <span class="s1">'x-api-key'</span><span class="p">:</span><span class="s1">'string'</span>
+  <span class="s1">'X-API-KEY'</span><span class="p">:</span><span class="s1">'string'</span>
 
 <span class="p">};</span>
 
@@ -3666,7 +3655,7 @@ x-api-key: string
 </code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'application/json'</span><span class="p">,</span>
-  <span class="s">'x-api-key'</span><span class="p">:</span> <span class="s">'string'</span>
+  <span class="s">'X-API-KEY'</span><span class="p">:</span> <span class="s">'string'</span>
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/visits/journeys/digital'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
@@ -3708,11 +3697,11 @@ x-api-key: string
 </tr>
 </thead><tbody>
 <tr>
-<td>x-api-key</td>
+<td>X-API-KEY</td>
 <td>header</td>
 <td>string</td>
 <td>true</td>
-<td>Pass the API key</td>
+<td>TruFactor provided API access key</td>
 </tr>
 <tr>
 <td>location_type</td>
@@ -3733,17 +3722,17 @@ x-api-key: string
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>Start time in epoch timestamp (in milliseconds)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>query</td>
 <td>number(int64)</td>
 <td>false</td>
-<td>none</td>
+<td>End time in epoch timestamp (in milliseconds)</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-12'>Enumerated Values</h4>
+<h4 id='enumerated-values-11'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -3911,37 +3900,37 @@ x-api-key: string
 </thead><tbody>
 <tr>
 <td>200</td>
-<td>X-Credits</td>
+<td>X-CREDITS</td>
 <td>string</td>
 <td></td>
-<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
+<td>Value indicating the number of credits consumed to serve the request</td>
 </tr>
 <tr>
 <td>400</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
-<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
+<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption</td>
 </tr>
 <tr>
 <td>401</td>
 <td>WWW_Authenticate</td>
 <td>string</td>
 <td></td>
-<td>none</td>
+<td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
 <tr>
 <td>429</td>
-<td>RequestId</td>
+<td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
-<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.</td>
+<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
+<!--<aside class="success">
 This operation does not require authentication
-</aside>
+</aside>-->
 <h1 id='entities'>Entities</h1>
 <h2 id="tocSplace">Place</h2>
 
@@ -4315,7 +4304,7 @@ This operation does not require authentication
 <td>Describes a polygon i.e a list of longitude and latitude co-ordinates representing a bounded region</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-13'>Enumerated Values</h4>
+<h4 id='enumerated-values-12'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -4430,7 +4419,7 @@ This operation does not require authentication
 <td>Total number of unique users that visited the place falling in to the percentile</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-14'>Enumerated Values</h4>
+<h4 id='enumerated-values-13'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -4643,7 +4632,7 @@ This operation does not require authentication
 </tr>
 </tbody></table>
 
-<h2 id="tocSinline_response_200_1_data_summary">Visits Summary Data</h2>
+<h2 id="tocSinline_response_200_1_data_summary">Summary Data</h2>
 
 <p><a id="schemainline_response_200_1_data_summary"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -4677,7 +4666,7 @@ This operation does not require authentication
 </tr>
 </tbody></table>
 
-<h2 id="tocSinline_response_200_1_data_extrapolated_summary_error_metrics">Extrapolated Summary Data</h2>
+<h2 id="tocSinline_response_200_1_data_extrapolated_summary_error_metrics">Extrapolated Summary Error Metrics</h2>
 
 <p><a id="schemainline_response_200_1_data_extrapolated_summary_error_metrics"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -4711,7 +4700,7 @@ This operation does not require authentication
 </tr>
 </tbody></table>
 
-<h2 id="tocSinline_response_200_1_data_extrapolated_summary">inline_response_200_1_data_extrapolated_summary</h2>
+<h2 id="tocSinline_response_200_1_data_extrapolated_summary">Extrapolated Summary</h2>
 
 <p><a id="schemainline_response_200_1_data_extrapolated_summary"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -4749,14 +4738,14 @@ This operation does not require authentication
 </tr>
 <tr>
 <td>error_metrics</td>
-<td><a href="#schemainline_response_200_1_data_extrapolated_summary_error_metrics">Extrapolated Summary Data</a></td>
+<td><a href="#schemainline_response_200_1_data_extrapolated_summary_error_metrics">inline_response_200_1_data_extrapolated_summary_error_metrics</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 </tbody></table>
 
-<h2 id="tocSinline_response_200_1_data">inline_response_200_1_data</h2>
+<h2 id="tocSinline_response_200_1_data">Summary Data</h2>
 
 <p><a id="schemainline_response_200_1_data"></a></p>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -4786,7 +4775,7 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>summary</td>
-<td><a href="#schemainline_response_200_1_data_summary">Visits Summary Data</a></td>
+<td><a href="#schemainline_response_200_1_data_summary">inline_response_200_1_data_summary</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
