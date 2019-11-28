@@ -28,11 +28,27 @@ You can use our API to access TruFactor IaaS API endpoints, which can get inform
 
 We have language bindings in Shell, Http REST, Python, and JavaScript. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
+# Getting Started
+
+Head straight to [https://trufactor.io](https://trufactor.io) and create a TruFactor account. If you already have one, sign in to the portal and grab your API access key. Try to understand the core TruFactor concepts and the entities before getting your hands dirty.
+
+# Concepts
+
+## Places Of Interest
+
+TruFactor places contain information about a point of interest (POI) such as location name, address, geographical co-ordinates, category of the places and the brands associated with the place.
+
+## Insights
+
+### Visits
+Place traffic and the demographics that answers the number of users that visited a place, where they come from, how long they stayed there and so on.
+
+  
 # Authentication
 
 ## API Key
 
-TruFactor uses API keys to allow access to the API. API key is recommend if you only need to access your own account. All API key requests must contain the following headers:
+TruFactor uses API keys to allow access to the API. API key is recommended if you only need to access your own account. All API key requests must contain the following headers:
 
  - **X-API-KEY** - The api key as a string. 
 
@@ -354,9 +370,7 @@ print r.json()
 |exact_match|query|number(int32)|false|Set this parameter to 1 when you want to disable partial match in fields such as "name", "business.name", "city", "county", "state", "zip_code"|
 
 
-### Response Data
 
-<h2 id="tocSOn_Success">On Success</h2>
 
 <a id="schemaOn_Success"></a>
 
@@ -497,11 +511,11 @@ This operation does not require authentication
 </aside>
 -->
 
-### Properties
-
+<h2 id="tocSOn_Success">On Success</h2>
+### On Success
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|data|[[Place](#schemaplace)]|false|none|none|
+|data|[[Place](#schemaplace)]|false|none|Place object|
 |next|string|false|none|URL pointing to the next page of results.|
 
 <h2 id="tocSOn_Failure">On Failure</h2>
@@ -516,7 +530,7 @@ This operation does not require authentication
 
 ```
 
-*Response will contain this field only when HTTP status code is 400.*
+*Response will contain this object only when HTTP status code is 400.*
 
 ### Properties
 
@@ -633,11 +647,11 @@ Computes and returns the aggregated count of visitors and unique visitors that v
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -676,9 +690,8 @@ Computes and returns the aggregated count of visitors and unique visitors that v
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|400|RequestId|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|401|RequestId|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|429|RequestId|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+|200,400,401,429|RequestId|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+
 
 <!--
 <aside class="success">
@@ -767,11 +780,11 @@ Returns the 25th Percentile, 50th Percentile, 75th Percentile and 90th Percentil
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -803,7 +816,7 @@ Returns the 25th Percentile, 50th Percentile, 75th Percentile and 90th Percentil
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_2](#schemainline_response_200_2)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Summary Data Response](#tocSinline_response_200_1_data_summary)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
 |429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
@@ -903,8 +916,8 @@ Returns the top or bottom N stores based on the absolute as well as a multiple o
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
+|Parameter|Value|Description|
+|---|---|---|
 |bottom|0|
 |bottom|1|
 
@@ -1054,11 +1067,11 @@ Returns the aggregated percentage of users by demography (gender, age group, inc
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -1268,11 +1281,11 @@ Returns the percentage of users split by top apps used or the top apps visited b
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -1424,11 +1437,11 @@ Returns the percentage of users split by the websties visited by the users that 
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -1569,11 +1582,11 @@ Returns the percentage of users split by the home or work census block and dista
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -1684,11 +1697,11 @@ Returns the percentage of users split by the activity i.e hour\day of the week, 
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -1901,11 +1914,11 @@ Returns the percentage of users split by the other places they visited. Place of
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -2052,11 +2065,11 @@ Returns the percentage of users split by the other places visited by the users b
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -2225,11 +2238,11 @@ Returns the percentage of users split based on the top apps used at the store, X
 
 #### Enumerated Values
 
-|Parameter|Value|
-|---|---|
-|location_type|place_id|
-|location_type|point|
-|location_type|polygon|
+|Parameter|Value|Description|
+|---|---|---|
+|location_type|place_id|TruFactor place identifier|
+|location_type|point|Array of longitude and latitude representing a geographical point|
+|location_type|polygon|Array of points (longitude and latitude) representing a geometry|
 
 > Example responses
 
@@ -2354,6 +2367,8 @@ Returns the percentage of users split based on the top apps used at the store, X
 <!--<aside class="success">
 This operation does not require authentication
 </aside>-->
+
+# MetaData APIs
 
 # Entities
 
@@ -2543,7 +2558,7 @@ This operation does not require authentication
 #### Enumerated Values
 
 |Property|Value|
-|---|---|
+|---|---|---|
 |type|point|
 |type|polygon|
 
@@ -2592,7 +2607,7 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|error|[On Failure](#schemaOn_Failure)|false|none|Response will contain this field only when HTTP status code is 400.|
+|error|[On Failure](#schemaOn_Failure)|false|none|Response will contain this object only when HTTP status code is 400.|
 
 <h2 id="tocSboundary">boundary</h2>
 
