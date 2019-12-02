@@ -234,7 +234,16 @@
                     <a href="#places-of-interest" class="toc-h2 toc-link" data-title="Places Of Interest">Places Of Interest</a>
                   </li>
                   <li>
-                    <a href="#insights" class="toc-h2 toc-link" data-title="Insights">Insights</a>
+                    <a href="#business" class="toc-h2 toc-link" data-title="Business">Business</a>
+                  </li>
+                  <li>
+                    <a href="#brands" class="toc-h2 toc-link" data-title="Brands">Brands</a>
+                  </li>
+                  <li>
+                    <a href="#categories" class="toc-h2 toc-link" data-title="Categories">Categories</a>
+                  </li>
+                  <li>
+                    <a href="#visits" class="toc-h2 toc-link" data-title="Visits">Visits</a>
                   </li>
               </ul>
           </li>
@@ -401,10 +410,26 @@
 
 <p>We have language bindings in Shell, Http REST, Python, and JavaScript. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 <h1 id='getting-started'>Getting Started</h1>
-<p>Head straight to <a href="https://trufactor.io">https://trufactor.io</a> and create a TruFactor account. If you already have one, sign in to the portal and grab your API access key. Try to understand the core TruFactor concepts and the entities before getting your hands dirty.</p>
+<p>Head straight to <a href="https://trufactor.io">https://trufactor.io</a> and sign up for a TruFactor account. If you already have one, sign in to the portal and grab your API access key. Try to understand the core TruFactor concepts and the entities before getting your hands dirty.</p>
 <h1 id='concepts'>Concepts</h1><h2 id='places-of-interest'>Places Of Interest</h2>
 <p>TruFactor places contain information about a point of interest (POI) such as location name, address, geographical co-ordinates, category of the places and the brands associated with the place.</p>
-<h2 id='insights'>Insights</h2><h3 id='visits'>Visits</h3>
+
+<p>TruFactor places are carefully curated and sanitized set of information about real world locations of interest. Every TruFactor place is identified by an unique TruFactor place identifier. You can query for the list of places in TruFactor database using TruFactor places API. You can search for the list of places by various location co-ordinates such as a point (e.g longitude and latitude of the place), a bounded region (e.g polygon representing the boundary of the place) or just by passing geo names such as city, zip code, street address etc.</p>
+
+<p>An example TruFactor place of interest would be &quot;Oakpark mall, Overland park, Kansas City, Kansas, USA&quot;.</p>
+<h2 id='business'>Business</h2>
+<p>A TruFactor business entity represents a digital or a physical business in operation. Every business entity in TruFactor is identified by a unique TruFactor business identifier. A TruFactor business entity will have additional properties such as name of the business, the associated TruFactor place, if applicable.</p>
+
+<p>An example TruFactor business entity would be &quot;Enterprise rent-a-car&quot;.</p>
+<h2 id='brands'>Brands</h2>
+<p>A TruFactor entity that models the brand of a service or the goods sold in the real world. A TruFactor brand entity is identified by a unique TruFactor brand identifier. A brand entity may be associated with one or more places of interest or with the TruFactor business entities.</p>
+
+<p>An example TruFactor brand entity would be &quot;Toyota&quot;. </p>
+<h2 id='categories'>Categories</h2>
+<p>TruFactor categories are associated with the TruFactor places of interest or with the TruFactor business and brand entities. TruFactor categories are hierarchical in nature i.e A TruFactor category may have one or more sub-categories underneath. There is no limit to the level of the hierarchy.</p>
+
+<p>An example TruFactor category would be &quot;Automobile&quot;. The sub-categories under &quot;Automobile&quot; would be &quot;Cars&quot;, &quot;Trucks&quot; etc. A TruFactor business entity such as &quot;Enterprise rent-a-car&quot; will be associated with the category &quot;Automobile&quot; and sub-category &quot;Cars&quot;. The TruFactor brand entities such as &quot;Toyota&quot;, &quot;Honda&quot; will be associated with the category &quot;Automobile&quot; and sub-category &quot;Cars&quot; as well.</p>
+<h2 id='visits'>Visits</h2>
 <p>Place traffic and the demographics that answers the number of users that visited a place, where they come from, how long they stayed there and so on.</p>
 <h1 id='authentication'>Authentication</h1><h2 id='api-key'>API Key</h2>
 <p>TruFactor uses API keys to allow access to the API. API key is recommended if you only need to access your own account. All API key requests must contain the following headers:</p>
