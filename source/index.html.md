@@ -30,7 +30,7 @@ We have language bindings in Shell, Http REST, Python, and JavaScript. You can v
 
 # Getting Started
 
-Head straight to [https://trufactor.io](https://trufactor.io) and create a TruFactor account. If you already have one, sign in to the portal and grab your API access key. Try to understand the core TruFactor concepts and the entities before getting your hands dirty.
+Head straight to [https://trufactor.io](https://trufactor.io) and sign up for a TruFactor account. If you already have one, sign in to the portal and grab your API access key. Try to understand the core TruFactor concepts and the entities before getting your hands dirty.
 
 # Concepts
 
@@ -38,9 +38,29 @@ Head straight to [https://trufactor.io](https://trufactor.io) and create a TruFa
 
 TruFactor places contain information about a point of interest (POI) such as location name, address, geographical co-ordinates, category of the places and the brands associated with the place.
 
-## Insights
+TruFactor places are carefully curated and sanitized set of information about real world locations of interest. Every TruFactor place is identified by an unique TruFactor place identifier. You can query for the list of places in TruFactor database using TruFactor places API. You can search for the list of places by various location co-ordinates such as a point (e.g longitude and latitude of the place), a bounded region (e.g polygon representing the boundary of the place) or just by passing geo names such as city, zip code, street address etc.
 
-### Visits
+An example TruFactor place of interest would be "Oakpark mall, Overland park, Kansas City, Kansas, USA".
+
+## Business
+
+A TruFactor business entity represents a digital or a physical business in operation. Every business entity in TruFactor is identified by a unique TruFactor business identifier. A TruFactor business entity will have additional properties such as name of the business, the associated TruFactor place, if applicable.
+
+An example TruFactor business entity would be "Enterprise rent-a-car".
+
+## Brands
+
+A TruFactor entity that models the brand of a service or the goods sold in the real world. A TruFactor brand entity is identified by a unique TruFactor brand identifier. A brand entity may be associated with one or more places of interest or with the TruFactor business entities.
+
+An example TruFactor brand entity would be "Toyota". 
+
+## Categories
+
+TruFactor categories are associated with the TruFactor places of interest or with the TruFactor business and brand entities. TruFactor categories are hierarchical in nature i.e A TruFactor category may have one or more sub-categories underneath. There is no limit to the level of the hierarchy.
+
+An example TruFactor category would be "Automobile". The sub-categories under "Automobile" would be "Cars", "Trucks" etc. A TruFactor business entity such as "Enterprise rent-a-car" will be associated with the category "Automobile" and sub-category "Cars". The TruFactor brand entities such as "Toyota", "Honda" will be associated with the category "Automobile" and sub-category "Cars" as well.
+
+## Visits
 Place traffic and the demographics that answers the number of users that visited a place, where they come from, how long they stayed there and so on.
 
   
