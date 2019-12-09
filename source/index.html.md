@@ -277,8 +277,8 @@ Pass one or more comma separated place ids to fetch the details of the places. A
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Response object containing list of matching place details if the request is successful.|[On Success](#schemaOn_Success)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When one of the passed ids is in invalid format (e.g in non UUID format) or when the ids are not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#schemainline_response_400)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Response object containing list of matching place details if the request is successful.|[On Success](#tocSOn_Success)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When one of the passed ids is in invalid format (e.g in non UUID format) or when the ids are not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
 
 ### Response Headers
@@ -513,7 +513,7 @@ print r.json()
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of matching place details|[On Success](#schemaOn_Success)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of matching place details|[On Success](#tocSOn_Success)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When one of the passed ids is in invalid format (e.g in non UUID format) or when the ids are not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
 
@@ -700,17 +700,17 @@ Computes and returns the aggregated count of visitors and unique visitors that v
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Response object. Typically, the status of the request is returned in HTTP status code. If the request is successful, the response object will contain "result" object. If the request did not succeed, the response will contain "error" object which will in turn contain the error code, message description and detailed description of the error for debugging.|[On Success](#schemainline_response_200_1)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#schemainline_response_400)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Response object. Typically, the status of the request is returned in HTTP status code. If the request is successful, the response object will contain "result" object. If the request did not succeed, the response will contain "error" object which will in turn contain the error code, message description and detailed description of the error for debugging.|[On Success](#tocSinline_response_200_1_data_summary)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized access|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
 
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|200,400,401,429|RequestId|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+||200,400,401,429|X-REQUEST-ID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
 
 
 <!--
@@ -837,18 +837,18 @@ Returns the 25th Percentile, 50th Percentile, 75th Percentile and 90th Percentil
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Summary Data Response](#tocSinline_response_200_1_data_summary)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
 
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|400|RequestId|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+|400,429|X-REQUEST-ID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
 |401|WWW_Authenticate|string||The WWW-Authenticate header is sent along with a 401 Unauthorized response|
-|429|RequestId|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+
 
 <!--<aside class="success">
 This operation does not require authentication
@@ -938,8 +938,8 @@ Returns the top or bottom N stores based on the absolute as well as a multiple o
 
 |Parameter|Value|Description|
 |---|---|---|
-|bottom|0|
-|bottom|1|
+|bottom|0|Set this value to fetch the top N stores|
+|bottom|1|Set this value to fetch the bottom N stores|
 
 > Example responses
 
@@ -986,19 +986,19 @@ Returns the top or bottom N stores based on the absolute as well as a multiple o
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_3](#schemainline_response_200_3)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Top Stores By Visits Response Data](#tocSinline_response_200_3)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
 
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|400|RequestId|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+|200,400,401,429|X-REQUEST-ID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
 |401|WWW_Authenticate|string||The WWW-Authenticate header is sent along with a 401 Unauthorized response|
-|429|RequestId|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+
 
 <!--
 <aside class="success">
@@ -1201,19 +1201,19 @@ Returns the aggregated percentage of users by demography (gender, age group, inc
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_4](#schemainline_response_200_4)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Response Data](#schemainline_response_200_4)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
 
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|400|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+|200,400,401,429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
 |401|WWW_Authenticate|string||The WWW-Authenticate header is sent along with a 401 Unauthorized response|
-|429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+
 
 <!--
 <aside class="success">
@@ -1359,19 +1359,19 @@ Returns the percentage of users split by top apps used or the top apps visited b
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_5](#schemainline_response_200_5)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[App Insights Summary Response Data](#schemainline_response_200_5)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
 
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|400|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+|200,400,401,429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
 |401|WWW_Authenticate|string||The WWW-Authenticate header is sent along with a 401 Unauthorized response|
-|429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+
 
 <!--
 <aside class="success">
@@ -1503,19 +1503,19 @@ Returns the percentage of users split by the websties visited by the users that 
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_6](#schemainline_response_200_6)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Mobile Web Insights Summary Response Data](#tocSinline_response_200_6)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
 
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|400|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+|200,400,401,429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
 |401|WWW_Authenticate|string||The WWW-Authenticate header is sent along with a 401 Unauthorized response|
-|429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+
 
 <!--
 <aside class="success">
@@ -1620,19 +1620,19 @@ Returns the percentage of users split by the home or work census block and dista
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_7](#schemainline_response_200_7)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Area Summary Response Data](#tocSinline_response_200_7)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
 
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
-|400|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+|400,401,429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
 |401|WWW_Authenticate|string||The WWW-Authenticate header is sent along with a 401 Unauthorized response|
-|429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+
 
 <!--
 <aside class="success">
@@ -1837,10 +1837,10 @@ Returns the percentage of users split by the activity i.e hour\day of the week, 
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_8](#schemainline_response_200_8)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Activities Summary Response Data](#tocSinline_response_200_8)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
 
 ### Response Headers
 
@@ -1986,19 +1986,19 @@ Returns the percentage of users split by the other places they visited. Place of
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_9](#schemainline_response_200_9)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Places Insights Response Data](#tocSinline_response_200_9)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#schemainline_response_400)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#schemainline_response_400)|
 
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||Value indicating the number of credits consumed to serve the request|
-|400|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+|200,400,401,429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
 |401|WWW_Authenticate|string||The WWW-Authenticate header is sent along with a 401 Unauthorized response|
-|429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+
 
 <!--
 <aside class="success">
@@ -2144,9 +2144,9 @@ Returns the percentage of users split by the other places visited by the users b
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_10](#schemainline_response_200_10)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#schemainline_response_400)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#schemainline_response_400)|
 
 ### Response Headers
 
@@ -2371,9 +2371,9 @@ Returns the percentage of users split based on the top apps used at the store, X
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_11](#schemainline_response_200_11)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#schemainline_response_400)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[inline_response_400](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#schemainline_response_400)|
 
 ### Response Headers
 
@@ -2901,5 +2901,777 @@ This operation does not require authentication
 
 
 
+<h2 id="tocSstore">Store</h2>
 
+<a id="schemastore"></a>
+
+```json
+{
+  "store_id": "bfc2c04e-3db7-4f80-9b80-7167746d02a1",
+  "store_display_name": "cvs pharmacy",
+  "link": "http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1",
+  "visits_count": 9832,
+  "unique_users_count": 8904,
+  "percentile": 90
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|store_id|string|false|none|none|
+|store_display_name|string|false|none|none|
+|link|string|false|none|Hypermedia link to fetch the details of the store|
+|visits_count|number|false|none|none|
+|unique_users_count|number|false|none|none|
+|percentile|number|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|percentile|25|
+|percentile|50|
+|percentile|75|
+|percentile|90|
+
+<h2 id="tocSinline_response_200_3">Top Stores By Visits Data</h2>
+
+<a id="schemainline_response_200_3"></a>
+
+```json
+{
+  "data": [
+    {
+      "store_id": "bfc2c04e-3db7-4f80-9b80-7167746d02a1",
+      "store_display_name": "cvs pharmacy",
+      "link": "http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1",
+      "visits_count": 9832,
+      "unique_users_count": 8904,
+      "percentile": 90
+    }
+  ],
+  "next": "string"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[[store](#schemastore)]|false|none|none|
+|next|string|false|none|URL to fetch the next set of results. By default, 25 result set is returned per request.|
+
+
+<h2 id="tocSinline_response_200_4">Demography By Visits Response Data</h2>
+
+<a id="schemainline_response_200_4"></a>
+
+```json
+{
+  "data": [
+    {
+      "place_id": "string",
+      "gender": [
+        {
+          "type": "male",
+          "value": 23.1
+        }
+      ],
+      "age_group": [
+        {
+          "type": "18-25",
+          "value": 13.1
+        }
+      ],
+      "income_group": [
+        {
+          "type": "0-25000",
+          "value": 13.1
+        }
+      ],
+      "ethnicity": [
+        {
+          "type": "asian",
+          "value": 13.1
+        }
+      ]
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[[Demography Data](#tocSinline_response_200_4_data)]|false|none|none|
+
+<h2 id="tocSinline_response_200_4_data">Demography Data</h2>
+
+<a id="schemainline_response_200_4_data"></a>
+
+```json
+{
+  "place_id": "string",
+  "gender": [
+    {
+      "type": "male",
+      "value": 23.1
+    }
+  ],
+  "age_group": [
+    {
+      "type": "18-25",
+      "value": 13.1
+    }
+  ],
+  "income_group": [
+    {
+      "type": "0-25000",
+      "value": 13.1
+    }
+  ],
+  "ethnicity": [
+    {
+      "type": "asian",
+      "value": 13.1
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|place_id|string|false|none|none|
+|gender|[[Gender Data](#tocSinline_response_200_4_gender)]|false|none|none|
+|age_group|[[Age Group Data](#tocSinline_response_200_4_age_group)]|false|none|none|
+|income_group|[[Income Group Data](#tocSinline_response_200_4_income_group)]|false|none|none|
+|ethnicity|[[Ethnicity Data](#tocSinline_response_200_4_ethnicity)]|false|none|none|
+
+<h2 id="tocSinline_response_200_4_gender">Gender Data</h2>
+
+<a id="schemainline_response_200_4_gender"></a>
+
+```json
+{
+  "type": "male",
+  "value": 23.1
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|false|none|none|
+|value|number(float)|false|none|the number returned is in percentage|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|male|
+|type|female|
+|type|unknown|
+|type|both|
+
+<h2 id="tocSinline_response_200_4_age_group">AgeGroup Data</h2>
+
+<a id="schemainline_response_200_4_age_group"></a>
+
+```json
+{
+  "type": "18-25",
+  "value": 13.1
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|false|none|none|
+|value|number|false|none|the number returned is in percentage|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|18-25|
+|type|26-35|
+|type|36-45|
+|type|46-60|
+|type|61-85|
+
+<h2 id="tocSinline_response_200_4_income_group">Income Group</h2>
+
+<a id="schemainline_response_200_4_income_group"></a>
+
+```json
+{
+  "type": "0-25000",
+  "value": 13.1
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|false|none|none|
+|value|number|false|none|the number returned is in percentage|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|0-25000|
+|type|25000-100000|
+
+<h2 id="tocSinline_response_200_4_ethnicity">Ethnicity</h2>
+
+<a id="schemainline_response_200_4_ethnicity"></a>
+
+```json
+{
+  "type": "asian",
+  "value": 13.1
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|type|string|false|none|none|
+|value|number|false|none|the number returned is in percentage|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|asian|
+|type|african american|
+|type|hispanic|
+|type|unknown|
+
+<h2 id="tocSinline_response_200_5_data">App Data</h2>
+
+<a id="schemainline_response_200_5_data"></a>
+
+```json
+{
+  "app_id": "string",
+  "link": "string",
+  "app_category_id": "string",
+  "app_display_name": "TikTok",
+  "app_publisher_name": "TikTok Pte Ltd",
+  "app_publisher_logo": "https://play.google.com/store/apps/developer?id=TikTok+Pte.+Ltd.",
+  "app_icon": "https://lh3.googleusercontent.com/2kdv4gGWKchMkThhxMYlWlkSouhx6BP50X1b7O7_Yl78fFCitAe3t4hLACuCyC9tsJA=s180-rw",
+  "ios_link": "string",
+  "android_link": "https://play.google.com/store/apps/details?id=com.ss.android.ugc.trill&hl=en_IN",
+  "users_in_percentage": 40.9
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|app_id|string|false|none|Internal id of the app|
+|link|string|false|none|URL to fetch the details of the app|
+|app_category_id|string|false|none|ID of the category that theapp belongs to. Look up category metadata API to fetch the category details|
+|app_display_name|string|false|none|Display name of the app|
+|app_publisher_name|string|false|none|Name of the app publisher|
+|app_publisher_logo|string|false|none|none|
+|app_icon|string|false|none|none|
+|ios_link|string|false|none|none|
+|android_link|string|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_5">App Insights Summary Response Data</h2>
+
+<a id="schemainline_response_200_5"></a>
+
+```json
+{
+  "data": [
+    {
+      "data": [
+        {
+          "app_id": "string",
+          "link": "string",
+          "app_category_id": "string",
+          "app_display_name": "TikTok",
+          "app_publisher_name": "TikTok Pte Ltd",
+          "app_publisher_logo": "https://play.google.com/store/apps/developer?id=TikTok+Pte.+Ltd.",
+          "app_icon": "https://lh3.googleusercontent.com/2kdv4gGWKchMkThhxMYlWlkSouhx6BP50X1b7O7_Yl78fFCitAe3t4hLACuCyC9tsJA=s180-rw",
+          "ios_link": "string",
+          "android_link": "https://play.google.com/store/apps/details?id=com.ss.android.ugc.trill&hl=en_IN",
+          "users_in_percentage": 40.9
+        }
+      ]
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[[App Data](#tocSinline_response_200_5_data)]|false|none|none|
+
+
+<h2 id="tocSinline_response_200_6_data">Mobile Web Publisher Data</h2>
+
+<a id="schemainline_response_200_6_data"></a>
+
+```json
+{
+  "website_category_id": "string",
+  "publisher_name": "Google",
+  "url": "http://www.maps.google.com",
+  "users_in_percentage": 39.1
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|website_category_id|string|false|none|ID of the website category. Look up category metadata API to fetch the category details|
+|publisher_name|string|false|none|Display name of web site publisher|
+|url|string|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_6">Mobile Web Insights Response Data</h2>
+
+<a id="schemainline_response_200_6"></a>
+
+```json
+{
+  "data": [
+    {
+      "website_category_id": "string",
+      "publisher_name": "Google",
+      "url": "http://www.maps.google.com",
+      "users_in_percentage": 39.1
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[[Mobile Web Publisher Data](#tocSinline_response_200_6_data)]|false|none|none|
+
+<h2 id="tocSinline_response_200_7_data_by_home_census_block_group">Censuse_Block_Group Data</h2>
+
+<a id="schemainline_response_200_7_data_by_home_census_block_group"></a>
+
+```json
+{
+  "block_group_id": "string",
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|block_group_id|string|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_7_data_by_distance_between_home_and_place">Distance Between Home_And Place Data</h2>
+
+<a id="schemainline_response_200_7_data_by_distance_between_home_and_place"></a>
+
+```json
+{
+  "radius_in_miles": 0,
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|radius_in_miles|number|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_7_data_by_time_between_home_and_place">Time Between Home And POI Data</h2>
+
+<a id="schemainline_response_200_7_data_by_time_between_home_and_place"></a>
+
+```json
+{
+  "time_range": "string",
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|time_range|string|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+
+<h2 id="tocSinline_response_200_7_data">Area Summary Data</h2>
+
+<a id="schemainline_response_200_7_data"></a>
+
+```json
+{
+  "by_home_census_block_group": [
+    {
+      "block_group_id": "string",
+      "users_in_percentage": 0
+    }
+  ],
+  "by_work_census_block_group": [
+    {
+      "block_group_id": "string",
+      "users_in_percentage": 0
+    }
+  ],
+  "by_distance_between_home_and_place": [
+    {
+      "radius_in_miles": 0,
+      "users_in_percentage": 0
+    }
+  ],
+  "by_time_between_home_and_place": [
+    {
+      "time_range": "string",
+      "users_in_percentage": 0
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|by_home_census_block_group|[[Census Block Group Data Of Home Location](#tocSinline_response_200_7_data_by_home_census_block_group)]|false|none|none|
+|by_work_census_block_group|[[Census Block Group Data Of Work Location](#tocSinline_response_200_7_data_by_home_census_block_group)]|false|none|none|
+|by_distance_between_home_and_place|[[Distance Between Home and POI Data](#tocSinline_response_200_7_data_by_distance_between_home_and_place)]|false|none|none|
+|by_time_between_home_and_place|[[Travel Time Between Home and POI Data](#tocSinline_response_200_7_data_by_time_between_home_and_place)]|false|none|none|
+
+
+
+<h2 id="tocSinline_response_200_7">Area Summary Response Data</h2>
+
+<a id="schemainline_response_200_7"></a>
+
+```json
+"{\"data\":{\"by_home_census_block_group\":[{\"block_group_id\":\"101001\",\"users_in_percentage\":47.3}],\"by_work_census_block_group\":[{\"block_group_id\":\"101002\",\"users_in_percentage\":40.1}],\"by_distance_between_home_and_place\":[{\"radius_in_miles\":5,\"users_in_percentage\":0},{\"radius_in_miles\":15,\"users_in_percentage\":0},{\"radius_in_miles\":25,\"users_in_percentage\":0}],\"by_time_between_home_and_place\":[{\"time_range\":\"5-15\",\"users_in_percentage\":12.4},{\"time_range\":\"15-30\",\"users_in_percentage\":21.4},{\"time_range\":\"30-45\",\"users_in_percentage\":28.1},{\"time_range\":\"45-60\",\"users_in_percentage\":20.4},{\"time_range\":\"> 60\",\"users_in_percentage\":11.4}]}}"
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[Area Summary Data](#tocSinline_response_200_7_data)|false|none|none|
+
+<h2 id="tocSinline_response_200_8_data_by_day_of_week">Activities Data By Day Of Week</h2>
+
+<a id="schemainline_response_200_8_data_by_day_of_week"></a>
+
+```json
+{
+  "day": "string",
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|day|string|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_8_data_by_hour_of_day">Activities Data By Hour Of Day</h2>
+
+<a id="schemainline_response_200_8_data_by_hour_of_day"></a>
+
+```json
+{
+  "hour_range": "string",
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|hour_range|string|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_8_data_by_visit_frequency">Activities Data By Frequency Of Visit</h2>
+
+<a id="schemainline_response_200_8_data_by_visit_frequency"></a>
+
+```json
+{
+  "frequency_range": "string",
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|frequency_range|string|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_8_data_by_dwell_time">Activities Data By Dwell Time</h2>
+
+<a id="schemainline_response_200_8_data_by_dwell_time"></a>
+
+```json
+{
+  "dwell_time_range": "string",
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|dwell_time_range|string|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_8_data">Activities Summary Data</h2>
+
+<a id="schemainline_response_200_8_data"></a>
+
+```json
+{
+  "by_day_of_week": [
+    {
+      "day": "string",
+      "users_in_percentage": 0
+    }
+  ],
+  "by_hour_of_day": [
+    {
+      "hour_range": "string",
+      "users_in_percentage": 0
+    }
+  ],
+  "by_visit_frequency": [
+    {
+      "frequency_range": "string",
+      "users_in_percentage": 0
+    }
+  ],
+  "by_dwell_time": [
+    {
+      "dwell_time_range": "string",
+      "users_in_percentage": 0
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|by_day_of_week|[[Activities Data By Day Of Week](#tocSinline_response_200_8_data_by_day_of_week)]|false|none|none|
+|by_hour_of_day|[[Activities Data By Hour Of Day](#tocSinline_response_200_8_data_by_hour_of_day)]|false|none|none|
+|by_visit_frequency|[[Activities Data By Frequency Of Vist](#tocSinline_response_200_8_data_by_visit_frequency)]|false|none|none|
+|by_dwell_time|[[Activiteis Data By Dwell Time](#tocSinline_response_200_8_data_by_dwell_time)]|false|none|none|
+
+<h2 id="tocSinline_response_200_8">Activities Summary Response Data</h2>
+
+<a id="schemainline_response_200_8"></a>
+
+```json
+{
+  "data": {
+    "by_day_of_week": [
+      {
+        "day": "string",
+        "users_in_percentage": 0
+      }
+    ],
+    "by_hour_of_day": [
+      {
+        "hour_range": "string",
+        "users_in_percentage": 0
+      }
+    ],
+    "by_visit_frequency": [
+      {
+        "frequency_range": "string",
+        "users_in_percentage": 0
+      }
+    ],
+    "by_dwell_time": [
+      {
+        "dwell_time_range": "string",
+        "users_in_percentage": 0
+      }
+    ]
+  }
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[Activities Summary Data](#tocSinline_response_200_8_data)|false|none|none|
+
+
+<h2 id="tocSinline_response_200_9_data_other_places_visited_by_category">Other Places Visited By Category Data</h2>
+
+<a id="schemainline_response_200_9_data_other_places_visited_by_category"></a>
+
+```json
+{
+  "place_category_id": "string",
+  "place_category_name": "string",
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|place_category_id|string|false|none|none|
+|place_category_name|string|false|none|none|
+|users_in_percentage|number|false|none|none|
+
+
+
+<h2 id="tocSinline_response_200_9_data_top_visited_pois">Top Visited POIs Data</h2>
+
+<a id="schemainline_response_200_9_data_top_visited_pois"></a>
+
+```json
+{
+  "place_id": "string",
+  "place_name": "string",
+  "link": "string",
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|place_id|string|false|none|none|
+|place_name|string|false|none|none|
+|link|string|false|none|URL to fetch the details of the place|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_9_data">Places Insights Summary Data</h2>
+
+<a id="schemainline_response_200_9_data"></a>
+
+```json
+{
+  "other_places_visited_by_category": [
+    {
+      "place_category_id": "string",
+      "place_category_name": "string",
+      "users_in_percentage": 0
+    }
+  ],
+  "top_visited_pois": [
+    {
+      "place_id": "string",
+      "place_name": "string",
+      "link": "string",
+      "users_in_percentage": 0
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|other_places_visited_by_category|[[Other Places Visited By Category](#tocSinline_response_200_9_data_other_places_visited_by_category)]|false|none|none|
+|top_visited_pois|[[Top Visited POIs Data](#schemainline_response_200_9_data_top_visited_pois)]|false|none|none|
+
+<h2 id="tocSinline_response_200_9">Places Insights Response Data</h2>
+
+<a id="schemainline_response_200_9"></a>
+
+```json
+{
+  "data": {
+    "other_places_visited_by_category": [
+      {
+        "place_category_id": "string",
+        "place_category_name": "string",
+        "users_in_percentage": 0
+      }
+    ],
+    "top_visited_pois": [
+      {
+        "place_id": "string",
+        "place_name": "string",
+        "link": "string",
+        "users_in_percentage": 0
+      }
+    ]
+  }
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[Places Insights Summary Data](#tocSinline_response_200_9_data)|false|none|none|
 
