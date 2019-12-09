@@ -226,7 +226,7 @@ Pass one or more comma separated place ids to fetch the details of the places. A
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Response object containing list of matching place details if the request is successful.|[On Success](#schemaOn_Success)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Response object containing list of matching place details if the request is successful.|[On Success](#tocSOn_Success)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When one of the passed ids is in invalid format (e.g in non UUID format) or when the ids are not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
 
@@ -383,9 +383,7 @@ print r.json()
 
 `GET /places/search`
 
-*Searches for the places by the name, business, categories, any of the address fields (city, county, zip) and the geographical co-ordinates.*
-
-Seaches the places by name of the places, names of the businesses, categories of the places, address fields and the geographical co-ordinates.
+*Searches for the places by the name of the place, business that operates out of the place, categories that the place belongs to and\or any of the address fields (city, county, zip) and by various geographical co-ordinates such as latitude, longitude combination.*
 
 <h3 id="search_places-parameters">Parameters</h3>
 
@@ -469,7 +467,7 @@ Seaches the places by name of the places, names of the businesses, categories of
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of matching place details|[On Success](#schemaOn_Success)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of matching place details|[On Success](#tocSOn_Success)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When one of the passed ids is in invalid format (e.g in non UUID format) or when the ids are not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[inline_response_400](#schemainline_response_400)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
 
