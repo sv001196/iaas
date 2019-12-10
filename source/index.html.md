@@ -150,11 +150,11 @@ PlacesAPI provides APIs to fetch the location of interest by passing various sea
 curl -X GET /places \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: string'
-
+  -d "query=\"ids%20EQ%20'd290f1ee-6c54-4b01-90e6-d701748f0851'\""
 ```
 
 ```http
-GET /places HTTP/1.1
+GET /places?ids=d290f1ee-6c54-4b01-90e6-d701748f0851 HTTP/1.1
 
 Accept: application/json
 X-API-KEY: string
@@ -170,7 +170,7 @@ const headers = {
 
 };
 
-fetch('/places',
+fetch('/places?ids=d290f1ee-6c54-4b01-90e6-d701748f0851,
 {
   method: 'GET',
 
@@ -192,7 +192,7 @@ headers = {
 }
 
 r = requests.get('/places', params={
-
+'ids':'d290f1ee-6c54-4b01-90e6-d701748f0851'
 }, headers = headers)
 
 print r.json()
@@ -310,11 +310,11 @@ Seaches the places by name of the places, names of the businesses, categories of
 curl -X GET /places/search \
   -H 'Accept: application/json' \
   -H 'X-API-KEY: string'
-
+  -d "query=\"text%20EQ%20'Louvre'\""
 ```
 
 ```http
-GET /places/search HTTP/1.1
+GET /places/search?text=Louvre HTTP/1.1
 
 Accept: application/json
 X-API-KEY: string
@@ -329,10 +329,10 @@ const fetch = require('node-fetch');
 const headers = {
   'Accept':'application/json',
   'X-API-KEY':'string'
-
+  
 };
 
-fetch('/places/search',
+fetch('/places/search?text=Louvre',
 {
   method: 'GET',
 
@@ -355,7 +355,7 @@ headers = {
 }
 
 r = requests.get('/places/search', params={
-
+'text':'Louvre'
 }, headers = headers)
 
 print r.json()
@@ -535,7 +535,7 @@ This operation does not require authentication
 ### On Success
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|data|[[Place](#schemaplace)]|false|none|Place object|
+|data|[Place](#tocSplace)|false|none|Place object|
 |next|string|false|none|URL pointing to the next page of results.|
 
 <h2 id="tocSOn_Failure">On Failure</h2>
@@ -949,16 +949,16 @@ Returns the top or bottom N stores based on the absolute as well as a multiple o
 {
   "data": [
     {
-      "store_id": "bfc2c04e-3db7-4f80-9b80-7167746d02a1",
-      "store_display_name": "cvs pharmacy",
+      "id": "bfc2c04e-3db7-4f80-9b80-7167746d02a1",
+      "name": "cvs pharmacy",
       "link": "http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1",
       "visits_count": 9832,
       "unique_users_count": 8904,
       "percentile": 90
     },
     {
-      "store_id": "239192ba-8933-4e87-9157-e2ec58596af7",
-      "store_display_name": "Plaza square mall",
+      "id": "239192ba-8933-4e87-9157-e2ec58596af7",
+      "name": "Plaza square mall",
       "link": "http://api.trufactor.io/store/239192ba-8933-4e87-9157-e2ec58596af7",
       "visits_count": 11837,
       "unique_users_count": 8032,
@@ -1201,7 +1201,7 @@ Returns the aggregated percentage of users by demography (gender, age group, inc
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Response Data](#schemainline_response_200_4)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Response Data](#tocSinline_response_200_4)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
 |429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
@@ -1359,7 +1359,7 @@ Returns the percentage of users split by top apps used or the top apps visited b
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[App Insights Summary Response Data](#schemainline_response_200_5)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[App Insights Summary Response Data](#tocSinline_response_200_5)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSOn_Failure)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
 |429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSOn_Failure)|
@@ -1987,9 +1987,9 @@ Returns the percentage of users split by the other places they visited. Place of
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Places Insights Response Data](#tocSinline_response_200_9)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#schemainline_response_400)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#tocSinline_response_400)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
-|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#schemainline_response_400)|
+|429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#tocSinline_response_400)|
 
 ### Response Headers
 
@@ -2143,7 +2143,7 @@ Returns the percentage of users split by the other places visited by the users b
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_10](#schemainline_response_200_10)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[On Success](#tocSinline_response_200_10)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#schemainline_response_400)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
 |429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#schemainline_response_400)|
@@ -2153,9 +2153,9 @@ Returns the percentage of users split by the other places visited by the users b
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||Value indicating the number of credits consumed to serve the request|
-|400|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
+|200,400,401,429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption.|
 |401|WWW_Authenticate|string||The WWW-Authenticate header is sent along with a 401 Unauthorized response|
-|429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption|
+
 
 <!--
 <aside class="success">
@@ -2219,23 +2219,6 @@ r = requests.get('/visits/journeys/digital', params={
 }, headers = headers)
 
 print r.json()
-
-```
-
-```java
-URL obj = new URL("/visits/journeys/digital");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
 
 ```
 
@@ -2370,7 +2353,7 @@ Returns the percentage of users split based on the top apps used at the store, X
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[inline_response_200_11](#schemainline_response_200_11)|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|list of insights as specified in the results parameter|[Digital Journey Insights Response Data](#tocSinline_response_200_11)|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters "start", "end" are invalid, the request will be rejected with HTTP status code 400.|[On Failure](#schemainline_response_400)|
 |401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|API key is missing or invalid|None|
 |429|[Too Many Requests](https://tools.ietf.org/html/rfc6585#section-4)|Raised when too many requests have been sent.|[On Failure](#schemainline_response_400)|
@@ -2380,9 +2363,9 @@ Returns the percentage of users split based on the top apps used at the store, X
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
 |200|X-CREDITS|string||Value indicating the number of credits consumed to serve the request|
-|400|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption|
+|200,400,401,429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption|
 |401|WWW_Authenticate|string||The WWW-Authenticate header is sent along with a 401 Unauthorized response|
-|429|X-REQUESTID|string||An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption|
+
 
 <!--<aside class="success">
 This operation does not require authentication
@@ -2390,7 +2373,7 @@ This operation does not require authentication
 
 # MetaData APIs
 
-# Entities
+# Core Entities
 
 <h2 id="tocSplace">Place</h2>
 
@@ -2463,12 +2446,117 @@ This operation does not require authentication
 |id|string(uuid)|true|none|An unique Trufactor place identifier|
 |name|string|true|none|Name of the place|
 |parent_place_id|string(uuid)|false|none|Reference to parent Trufactor place identifier. This attribute is available when a place is contained within an another place. For example, a restaurant within a shopping mall.|
-|brands|[[Brands](#schemaplace_brands)]|false|none|List of brands that this place is associated with.|
-|business|[Business](#schemaplace_business)|false|none|The business that own this place or a tenant operating out of this place|
-|categories|[[Categories](#schemaplace_categories)]|false|none|The Trufactor categories associated with this place|
-|contact|[Contact](#schemacontact)|false|none|Object representing various contact attributes such as phone, mobile and email addresses.|
-|address|[Address](#schemaaddress)|false|none|Object representing various address attributes of the place such as street, county, city, state and country.|
-|geo|[Geo](#schemageo)|false|none|Object representing a point or a bounded region (i.e Polygon)|
+|brands|[Brands](#tocSplace_brands)|false|none|List of brands that this place is associated with.|
+|business|[Business](#tocSplace_business)|false|none|The business that own this place or a tenant operating out of this place|
+|categories|[Categories](#tocSplace_categories)|false|none|The Trufactor categories associated with this place|
+|contact|[Contact](#tocScontact)|false|none|Object representing various contact attributes such as phone, mobile and email addresses.|
+|address|[Address](#tocSaddress)|false|none|Object representing various address attributes of the place such as street, county, city, state and country.|
+|geo|[Geo](#tocSgeo)|false|none|Object representing a point or a bounded region (i.e Polygon)|
+
+
+
+<h2 id="tocSplace_brands">Brands</h2>
+
+<a id="schemaplace_brands"></a>
+
+```json
+{
+  "id": "59b6675b-660f-44c3-93e7-1c031758fb15",
+  "name": "Toyota",
+  "link": "https://api.trufactor.com/brands/59b6675b-660f-44c3-93e7-1c031758fb15"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|false|none|An unique TruFactor identifier of the brand|
+|name|string|false|none|Name of the brand|
+|link|string|false|none|Hypermedia link to fetch the details of the brand|
+
+<h2 id="tocSplace_business">Business</h2>
+
+<a id="schemaplace_business"></a>
+
+```json
+{
+  "id": "eb3698d4-a27c-4d93-9f48-fb4355c0e63c",
+  "name": "McDonalds",
+  "link": "https://api.trufactor.com/businesses/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"
+}
+
+```
+
+*The business that own this place or a tenant operating out of this place*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string(uuid)|false|none|An unique Trufactor identifier of the business|
+|name|string|false|none|Name of the business|
+|link|string(uri)|false|none|Hypermedia link to fetch the details of the business|
+
+<h2 id="tocSplace_categories">Categories</h2>
+
+<a id="schemaplace_categories"></a>
+
+```json
+{
+  "id": "152f84ff-1f88-4e04-a406-d1bd4358105b",
+  "name": "Shopping mall",
+  "link": "https://api.trufactor.com/categories/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string(uuid)|false|none|An unique Trufactor identifier of the caetegory|
+|name|string|false|none|Name of the category|
+|link|string(url)|false|none|Hypermedia link to fetch the details of the category|
+
+<h2 id="tocSstore">Store</h2>
+
+<a id="schemastore"></a>
+
+```json
+{
+  "id": "bfc2c04e-3db7-4f80-9b80-7167746d02a1",
+  "name": "cvs pharmacy",
+  "link": "http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1",
+  "visits_count": 9832,
+  "unique_users_count": 8904,
+  "percentile": 90
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|false|none|none|
+|name|string|false|none|none|
+|link|string|false|none|Hypermedia link to fetch the details of the store|
+|visits_count|number|false|none|none|
+|unique_users_count|number|false|none|none|
+|percentile|number|false|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|percentile|25|
+|percentile|50|
+|percentile|75|
+|percentile|90|
+
+
 
 <h2 id="tocScontact">Contact</h2>
 
@@ -2498,10 +2586,10 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|phone|[string]|false|none|List of phone numbers|
+|phone|string|false|none|List of phone numbers|
 |mobile|string|false|none|List of mobile numbers|
-|email|[string]|false|none|List of email addresses|
-|www|[string]|false|none|List of web sites|
+|email|string|false|none|List of email addresses|
+|www|string|false|none|List of web sites|
 
 <h2 id="tocSaddress">Address</h2>
 
@@ -2567,13 +2655,13 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[Point](#schemapoint)|false|none|none|
+|» *anonymous*|[Point](#tocSpoint)|false|none|none|
 
 *xor*
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» *anonymous*|[Polygon](#schemapolygon)|false|none|Describes a polygon i.e a list of longitude and latitude co-ordinates representing a bounded region|
+|» *anonymous*|[Polygon](#tocSpolygon)|false|none|Describes a polygon i.e a list of longitude and latitude co-ordinates representing a bounded region|
 
 #### Enumerated Values
 
@@ -2627,9 +2715,10 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|error|[On Failure](#schemaOn_Failure)|false|none|Response will contain this object only when HTTP status code is 400.|
+|error|[On Failure](#tocSOn_Failure)|false|none|Response will contain this object only when HTTP status code is 400.|
 
-<h2 id="tocSboundary">boundary</h2>
+<!--
+<h2 id="tocSboundary">Boundary</h2>
 
 <a id="schemaboundary"></a>
 
@@ -2641,7 +2730,9 @@ This operation does not require authentication
 }
 
 ```
+-->
 
+<!--
 <h2 id="tocSinline_response_200_2_data">inline_response_200_2_data</h2>
 
 <a id="schemainline_response_200_2_data"></a>
@@ -2711,71 +2802,8 @@ This operation does not require authentication
 |---|---|---|---|---|
 |coordinates|[number]|false|none|none|
 
-<h2 id="tocSplace_brands">Brands</h2>
-
-<a id="schemaplace_brands"></a>
-
-```json
-{
-  "id": "59b6675b-660f-44c3-93e7-1c031758fb15",
-  "name": "Toyota",
-  "link": "https://api.trufactor.com/brands/59b6675b-660f-44c3-93e7-1c031758fb15"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|string|false|none|An unique TruFactor identifier of the brand|
-|name|string|false|none|Name of the brand|
-|link|string|false|none|Hypermedia link to fetch the details of the brand|
-
-<h2 id="tocSplace_business">Business</h2>
-
-<a id="schemaplace_business"></a>
-
-```json
-{
-  "id": "eb3698d4-a27c-4d93-9f48-fb4355c0e63c",
-  "name": "McDonalds",
-  "link": "https://api.trufactor.com/businesses/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"
-}
-
-```
-
-*The business that own this place or a tenant operating out of this place*
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|string(uuid)|false|none|An unique Trufactor identifier of the business|
-|name|string|false|none|Name of the business|
-|link|string(uri)|false|none|Hypermedia link to fetch the details of the business|
-
-<h2 id="tocSplace_categories">Categories</h2>
-
-<a id="schemaplace_categories"></a>
-
-```json
-{
-  "id": "152f84ff-1f88-4e04-a406-d1bd4358105b",
-  "name": "Shopping mall",
-  "link": "https://api.trufactor.com/categories/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|string(uuid)|false|none|An unique Trufactor identifier of the caetegory|
-|name|string|false|none|Name of the category|
-|link|string(url)|false|none|Hypermedia link to fetch the details of the category|
-
+-->
+# Response Data Entities
 
 <h2 id="tocSinline_response_200_1_data_summary">Summary Data</h2>
 
@@ -2837,8 +2865,9 @@ This operation does not require authentication
 |---|---|---|---|---|
 |visits_count|number|false|none|Extrapolated total number of visitors who visited the place|
 |unique_users_count|number|false|none|Extrapolated total number of unique vistors who visited the place|
-|error_metrics|[inline_response_200_1_data_extrapolated_summary_error_metrics](#schemainline_response_200_1_data_extrapolated_summary_error_metrics)|false|none|none|
+|error_metrics|[Extrapolated Summary Error Metrics](#tocSinline_response_200_1_data_extrapolated_summary_error_metrics)|false|none|none|
 
+<!--
 <h2 id="tocSinline_response_200_1_data">Summary Data</h2>
 
 <a id="schemainline_response_200_1_data"></a>
@@ -2867,7 +2896,9 @@ This operation does not require authentication
 |---|---|---|---|---|
 |summary|[inline_response_200_1_data_summary](#schemainline_response_200_1_data_summary)|false|none|none|
 |extrapolated_summary|[inline_response_200_1_data_extrapolated_summary](#schemainline_response_200_1_data_extrapolated_summary)|false|none|none|
+-->
 
+<!--
 <h2 id="tocSinline_response_200_1">inline_response_200_1</h2>
 
 <a id="schemainline_response_200_1"></a>
@@ -2897,45 +2928,9 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |data|[inline_response_200_1_data](#schemainline_response_200_1_data)|false|none|none|
+-->
 
 
-
-
-<h2 id="tocSstore">Store</h2>
-
-<a id="schemastore"></a>
-
-```json
-{
-  "store_id": "bfc2c04e-3db7-4f80-9b80-7167746d02a1",
-  "store_display_name": "cvs pharmacy",
-  "link": "http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1",
-  "visits_count": 9832,
-  "unique_users_count": 8904,
-  "percentile": 90
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|store_id|string|false|none|none|
-|store_display_name|string|false|none|none|
-|link|string|false|none|Hypermedia link to fetch the details of the store|
-|visits_count|number|false|none|none|
-|unique_users_count|number|false|none|none|
-|percentile|number|false|none|none|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|percentile|25|
-|percentile|50|
-|percentile|75|
-|percentile|90|
 
 <h2 id="tocSinline_response_200_3">Top Stores By Visits Data</h2>
 
@@ -2945,8 +2940,8 @@ This operation does not require authentication
 {
   "data": [
     {
-      "store_id": "bfc2c04e-3db7-4f80-9b80-7167746d02a1",
-      "store_display_name": "cvs pharmacy",
+      "id": "bfc2c04e-3db7-4f80-9b80-7167746d02a1",
+      "name": "cvs pharmacy",
       "link": "http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1",
       "visits_count": 9832,
       "unique_users_count": 8904,
@@ -2962,7 +2957,7 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|data|[[store](#schemastore)]|false|none|none|
+|data|[store](#tocSstore)|false|none|none|
 |next|string|false|none|URL to fetch the next set of results. By default, 25 result set is returned per request.|
 
 
@@ -3009,7 +3004,7 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|data|[[Demography Data](#tocSinline_response_200_4_data)]|false|none|none|
+|data|[Demography Data](#tocSinline_response_200_4_data)|false|none|none|
 
 <h2 id="tocSinline_response_200_4_data">Demography Data</h2>
 
@@ -3051,10 +3046,10 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |place_id|string|false|none|none|
-|gender|[[Gender Data](#tocSinline_response_200_4_gender)]|false|none|none|
-|age_group|[[Age Group Data](#tocSinline_response_200_4_age_group)]|false|none|none|
-|income_group|[[Income Group Data](#tocSinline_response_200_4_income_group)]|false|none|none|
-|ethnicity|[[Ethnicity Data](#tocSinline_response_200_4_ethnicity)]|false|none|none|
+|gender|[Gender Data](#tocSinline_response_200_4_gender)|false|none|none|
+|age_group|[Age Group Data](#tocSinline_response_200_4_age_group)|false|none|none|
+|income_group|[Income Group Data](#tocSinline_response_200_4_income_group)|false|none|none|
+|ethnicity|[Ethnicity Data](#tocSinline_response_200_4_ethnicity)|false|none|none|
 
 <h2 id="tocSinline_response_200_4_gender">Gender Data</h2>
 
@@ -3640,7 +3635,7 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |other_places_visited_by_category|[[Other Places Visited By Category](#tocSinline_response_200_9_data_other_places_visited_by_category)]|false|none|none|
-|top_visited_pois|[[Top Visited POIs Data](#schemainline_response_200_9_data_top_visited_pois)]|false|none|none|
+|top_visited_pois|[[Top Visited POIs Data](#tocSinline_response_200_9_data_top_visited_pois)]|false|none|none|
 
 <h2 id="tocSinline_response_200_9">Places Insights Response Data</h2>
 
@@ -3675,3 +3670,253 @@ This operation does not require authentication
 |---|---|---|---|---|
 |data|[Places Insights Summary Data](#tocSinline_response_200_9_data)|false|none|none|
 
+<h2 id="tocSinline_response_200_10_before">Category Visited Data</h2>
+
+<a id="schemainline_response_200_10_before"></a>
+
+```json
+{
+  "category_id": "string",
+  "category_name": "string",
+  "users_in_percentage": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|category_id|string|false|none|Category ID|
+|category_name|string|false|none|Category name of the place visited before visiting this place|
+|users_in_percentage|number|false|none|none|
+
+<h2 id="tocSinline_response_200_10_data">Physical Journey Insights Data</h2>
+
+<a id="schemainline_response_200_10_data"></a>
+
+```json
+{
+  "before": [
+    {
+      "category_id": "string",
+      "category_name": "string",
+      "users_in_percentage": 0
+    }
+  ],
+  "after": [
+    {
+      "category_id": "string",
+      "category_name": "string",
+      "users_in_percentage": 0
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|before|[[Categories Visited Before Data](#tocSinline_response_200_10_before)]|false|none|none|
+|after|[[Categories Visited After Data](#tocSinline_response_200_10_before)]|false|none|none|
+
+<h2 id="tocSinline_response_200_10">Physical Journey Summary Response Data</h2>
+
+<a id="schemainline_response_200_10"></a>
+
+```json
+{
+  "data": [
+    {
+      "before": [
+        {
+          "category_id": "string",
+          "category_name": "string",
+          "users_in_percentage": 0
+        }
+      ],
+      "after": [
+        {
+          "category_id": "string",
+          "category_name": "string",
+          "users_in_percentage": 0
+        }
+      ]
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[[Physical Journey Insights Data](#tocSinline_response_200_10_data)]|false|none|none|
+
+
+
+<h2 id="tocSinline_response_200_11_data">Digital Journey Data</h2>
+
+<a id="schemainline_response_200_11_data"></a>
+
+```json
+{
+  "at": {
+    "category_id": "string",
+    "app_id": "string",
+    "app_display_name": "string",
+    "app_publisher_name": "string",
+    "ios_link": "string",
+    "android_link": "string",
+    "link": "string",
+    "users_in_percentage": 0
+  },
+  "before": {
+    "category_id": "string",
+    "app_id": "string",
+    "app_display_name": "string",
+    "app_publisher_name": "string",
+    "ios_link": "string",
+    "android_link": "string",
+    "link": "string",
+    "users_in_percentage": 0
+  },
+  "after": {
+    "category_id": "string",
+    "app_id": "string",
+    "app_display_name": "string",
+    "app_publisher_name": "string",
+    "ios_link": "string",
+    "android_link": "string",
+    "link": "string",
+    "users_in_percentage": 0
+  }
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|at|[Apps Used At The Store Data](#tocSinline_response_200_5_data)|false|none|none|
+|before|[Apps Used Before Visiting The Store Data](#tocSinline_response_200_5_data)|false|none|none|
+|after|[Apps Used After Visiting The Store Data](#tocSinline_response_200_5_data)|false|none|none|
+
+<h2 id="tocSinline_response_200_11">Digital Journey Insights Response Data</h2>
+
+<a id="schemainline_response_200_11"></a>
+
+```json
+{
+  "data": {
+    "at": {
+      "category_id": "string",
+      "app_id": "string",
+      "app_display_name": "string",
+      "app_publisher_name": "string",
+      "ios_link": "string",
+      "android_link": "string",
+      "link": "string",
+      "users_in_percentage": 0
+    },
+    "before": {
+      "category_id": "string",
+      "app_id": "string",
+      "app_display_name": "string",
+      "app_publisher_name": "string",
+      "ios_link": "string",
+      "android_link": "string",
+      "link": "string",
+      "users_in_percentage": 0
+    },
+    "after": {
+      "category_id": "string",
+      "app_id": "string",
+      "app_display_name": "string",
+      "app_publisher_name": "string",
+      "ios_link": "string",
+      "android_link": "string",
+      "link": "string",
+      "users_in_percentage": 0
+    }
+  }
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[Digital Journey Insights Data](#tocSinline_response_200_11_data)|false|none|none|
+
+<!-- 
+<h2 id="tocSplace_brands">Place_brands</h2>
+
+<a id="schemaplace_brands"></a>
+
+```json
+{
+  "id": "59b6675b-660f-44c3-93e7-1c031758fb15",
+  "name": "Toyota",
+  "link": "https://api.trufactor.com/brands/59b6675b-660f-44c3-93e7-1c031758fb15"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|false|none|An unique TruFactor identifier of the brand|
+|name|string|false|none|Name of the brand|
+|link|string|false|none|Hypermedia link to fetch the details of the brand|
+
+<h2 id="tocSplace_business">Place_business</h2>
+
+<a id="schemaplace_business"></a>
+
+```json
+{
+  "id": "eb3698d4-a27c-4d93-9f48-fb4355c0e63c",
+  "name": "McDonalds",
+  "link": "https://api.trufactor.com/businesses/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"
+}
+
+```
+
+*The business that own this place or a tenant operating out of this place*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string(uuid)|false|none|An unique Trufactor identifier of the business|
+|name|string|false|none|Name of the business|
+|link|string(uri)|false|none|Hypermedia link to fetch the details of the business|
+
+<h2 id="tocSplace_categories">Place_categories</h2>
+
+<a id="schemaplace_categories"></a>
+
+```json
+{
+  "id": "152f84ff-1f88-4e04-a406-d1bd4358105b",
+  "name": "Shopping mall",
+  "link": "https://api.trufactor.com/categories/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string(uuid)|false|none|An unique Trufactor identifier of the caetegory|
+|name|string|false|none|Name of the category|
+|link|string(url)|false|none|Hypermedia link to fetch the details of the category|
+-->
