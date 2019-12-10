@@ -209,7 +209,7 @@
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="images/logo-1e815a84.png" class="logo" alt="Logo" />
+      <img src="images/tf_logo-a1b37d36.png" class="logo" height="30" width="175" alt="Tf logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="http">http</a>
@@ -334,10 +334,22 @@
             <a href="#metadata-apis" class="toc-h1 toc-link" data-title="MetaData APIs">MetaData APIs</a>
           </li>
           <li>
-            <a href="#entities" class="toc-h1 toc-link" data-title="Entities">Entities</a>
+            <a href="#core-entities" class="toc-h1 toc-link" data-title="Core Entities">Core Entities</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#tocSplace" class="toc-h2 toc-link" data-title="Place">Place</a>
+                  </li>
+                  <li>
+                    <a href="#tocSplace_brands" class="toc-h2 toc-link" data-title="Brands">Brands</a>
+                  </li>
+                  <li>
+                    <a href="#tocSplace_business" class="toc-h2 toc-link" data-title="Business">Business</a>
+                  </li>
+                  <li>
+                    <a href="#tocSplace_categories" class="toc-h2 toc-link" data-title="Categories">Categories</a>
+                  </li>
+                  <li>
+                    <a href="#tocSstore" class="toc-h2 toc-link" data-title="Store">Store</a>
                   </li>
                   <li>
                     <a href="#tocScontact" class="toc-h2 toc-link" data-title="Contact">Contact</a>
@@ -354,24 +366,11 @@
                   <li>
                     <a href="#tocSpolygon" class="toc-h2 toc-link" data-title="Polygon">Polygon</a>
                   </li>
-                  <li>
-                    <a href="#tocSboundary" class="toc-h2 toc-link" data-title="boundary">boundary</a>
-                  </li>
-                  <li>
-                    <a href="#tocSinline_response_200_2_data" class="toc-h2 toc-link" data-title="inline_response_200_2_data">inline_response_200_2_data</a>
-                  </li>
-                  <li>
-                    <a href="#tocSinline_response_200_2" class="toc-h2 toc-link" data-title="inline_response_200_2">inline_response_200_2</a>
-                  </li>
-                  <li>
-                    <a href="#tocSplace_brands" class="toc-h2 toc-link" data-title="Brands">Brands</a>
-                  </li>
-                  <li>
-                    <a href="#tocSplace_business" class="toc-h2 toc-link" data-title="Business">Business</a>
-                  </li>
-                  <li>
-                    <a href="#tocSplace_categories" class="toc-h2 toc-link" data-title="Categories">Categories</a>
-                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#response-data-entities" class="toc-h1 toc-link" data-title="Response Data Entities">Response Data Entities</a>
+              <ul class="toc-list-h2">
                   <li>
                     <a href="#tocSinline_response_200_1_data_summary" class="toc-h2 toc-link" data-title="Summary Data">Summary Data</a>
                   </li>
@@ -380,15 +379,6 @@
                   </li>
                   <li>
                     <a href="#tocSinline_response_200_1_data_extrapolated_summary" class="toc-h2 toc-link" data-title="Extrapolated Summary">Extrapolated Summary</a>
-                  </li>
-                  <li>
-                    <a href="#tocSinline_response_200_1_data" class="toc-h2 toc-link" data-title="Summary Data">Summary Data</a>
-                  </li>
-                  <li>
-                    <a href="#tocSinline_response_200_1" class="toc-h2 toc-link" data-title="inline_response_200_1">inline_response_200_1</a>
-                  </li>
-                  <li>
-                    <a href="#tocSstore" class="toc-h2 toc-link" data-title="Store">Store</a>
                   </li>
                   <li>
                     <a href="#tocSinline_response_200_3" class="toc-h2 toc-link" data-title="Top Stores By Visits Data">Top Stores By Visits Data</a>
@@ -467,6 +457,21 @@
                   </li>
                   <li>
                     <a href="#tocSinline_response_200_9" class="toc-h2 toc-link" data-title="Places Insights Response Data">Places Insights Response Data</a>
+                  </li>
+                  <li>
+                    <a href="#tocSinline_response_200_10_before" class="toc-h2 toc-link" data-title="Category Visited Data">Category Visited Data</a>
+                  </li>
+                  <li>
+                    <a href="#tocSinline_response_200_10_data" class="toc-h2 toc-link" data-title="Physical Journey Insights Data">Physical Journey Insights Data</a>
+                  </li>
+                  <li>
+                    <a href="#tocSinline_response_200_10" class="toc-h2 toc-link" data-title="Physical Journey Summary Response Data">Physical Journey Summary Response Data</a>
+                  </li>
+                  <li>
+                    <a href="#tocSinline_response_200_11_data" class="toc-h2 toc-link" data-title="Digital Journey Data">Digital Journey Data</a>
+                  </li>
+                  <li>
+                    <a href="#tocSinline_response_200_11" class="toc-h2 toc-link" data-title="Digital Journey Insights Response Data">Digital Journey Insights Response Data</a>
                   </li>
               </ul>
           </li>
@@ -583,8 +588,8 @@ PlacesAPI provides APIs to fetch the location of interest by passing various sea
 curl -X GET /places <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'X-API-KEY: string'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/places</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+  -d <span class="s2">"query=</span><span class="se">\"</span><span class="s2">ids%20EQ%20'd290f1ee-6c54-4b01-90e6-d701748f0851'</span><span class="se">\"</span><span class="s2">"</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/places?ids=d290f1ee-6c54-4b01-90e6-d701748f0851</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
 X-API-KEY: string
@@ -597,11 +602,11 @@ X-API-KEY: string
 
 <span class="p">};</span>
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'/places'</span><span class="p">,</span>
-<span class="p">{</span>
-  <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'/places?ids=d290f1ee-6c54-4b01-90e6-d701748f0851,
+{
+  method: '</span><span class="nx">GET</span><span class="err">'</span><span class="p">,</span>
 
-  <span class="na">headers</span><span class="p">:</span> <span class="nx">headers</span>
+  <span class="nx">headers</span><span class="p">:</span> <span class="nx">headers</span>
 <span class="p">})</span>
 <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
@@ -616,7 +621,7 @@ X-API-KEY: string
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/places'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
+<span class="s">'ids'</span><span class="p">:</span><span class="s">'d290f1ee-6c54-4b01-90e6-d701748f0851'</span>
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -799,8 +804,8 @@ This operation does not require authentication
 curl -X GET /places/search <span class="se">\</span>
   -H <span class="s1">'Accept: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'X-API-KEY: string'</span>
-
-</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/places/search</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+  -d <span class="s2">"query=</span><span class="se">\"</span><span class="s2">text%20EQ%20'Louvre'</span><span class="se">\"</span><span class="s2">"</span>
+</code></pre><pre class="highlight http tab-http"><code><span class="nf">GET</span> <span class="nn">/places/search?text=Louvre</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 Accept: application/json
 X-API-KEY: string
@@ -813,7 +818,7 @@ X-API-KEY: string
 
 <span class="p">};</span>
 
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">'/places/search'</span><span class="p">,</span>
+<span class="nx">fetch</span><span class="p">(</span><span class="s1">'/places/search?text=Louvre'</span><span class="p">,</span>
 <span class="p">{</span>
   <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
 
@@ -832,7 +837,7 @@ X-API-KEY: string
 <span class="p">}</span>
 
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/places/search'</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span>
-
+<span class="s">'text'</span><span class="p">:</span><span class="s">'Louvre'</span>
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -1149,7 +1154,7 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>[<a href="#schemaplace">Place</a>]</td>
+<td><a href="#tocSplace">Place</a></td>
 <td>false</td>
 <td>none</td>
 <td>Place object</td>
@@ -1842,16 +1847,16 @@ X-API-KEY: string
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"store_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cvs pharmacy"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cvs pharmacy"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">9832</span><span class="p">,</span><span class="w">
       </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">8904</span><span class="p">,</span><span class="w">
       </span><span class="s2">"percentile"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"239192ba-8933-4e87-9157-e2ec58596af7"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"store_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Plaza square mall"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"239192ba-8933-4e87-9157-e2ec58596af7"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Plaza square mall"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.trufactor.io/store/239192ba-8933-4e87-9157-e2ec58596af7"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">11837</span><span class="p">,</span><span class="w">
       </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">8032</span><span class="p">,</span><span class="w">
@@ -2186,7 +2191,7 @@ X-API-KEY: string
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>list of insights as specified in the results parameter</td>
-<td><a href="#schemainline_response_200_4">Response Data</a></td>
+<td><a href="#tocSinline_response_200_4">Response Data</a></td>
 </tr>
 <tr>
 <td>400</td>
@@ -2431,7 +2436,7 @@ print r.json()
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>list of insights as specified in the results parameter</td>
-<td><a href="#schemainline_response_200_5">App Insights Summary Response Data</a></td>
+<td><a href="#tocSinline_response_200_5">App Insights Summary Response Data</a></td>
 </tr>
 <tr>
 <td>400</td>
@@ -3421,7 +3426,7 @@ X-API-KEY: string
 <td>400</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.5.1">Bad Request</a></td>
 <td>Bad input parameter. When the passed place_id is in invalid format (e.g in non UUID format) or when the place_id is not sent at all, the server will respond with HTTP 400 status code. Also, if the query parameters &quot;start&quot;, &quot;end&quot; are invalid, the request will be rejected with HTTP status code 400.</td>
-<td><a href="#schemainline_response_400">On Failure</a></td>
+<td><a href="#tocSinline_response_400">On Failure</a></td>
 </tr>
 <tr>
 <td>401</td>
@@ -3433,7 +3438,7 @@ X-API-KEY: string
 <td>429</td>
 <td><a href="https://tools.ietf.org/html/rfc6585#section-4">Too Many Requests</a></td>
 <td>Raised when too many requests have been sent.</td>
-<td><a href="#schemainline_response_400">On Failure</a></td>
+<td><a href="#tocSinline_response_400">On Failure</a></td>
 </tr>
 </tbody></table>
 <h3 id='response-headers-11'>Response Headers</h3>
@@ -3658,7 +3663,7 @@ X-API-KEY: string
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>list of insights as specified in the results parameter</td>
-<td><a href="#schemainline_response_200_10">inline_response_200_10</a></td>
+<td><a href="#tocSinline_response_200_10">On Success</a></td>
 </tr>
 <tr>
 <td>400</td>
@@ -3697,7 +3702,7 @@ X-API-KEY: string
 <td>Value indicating the number of credits consumed to serve the request</td>
 </tr>
 <tr>
-<td>400</td>
+<td>200,400,401,429</td>
 <td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
@@ -3709,13 +3714,6 @@ X-API-KEY: string
 <td>string</td>
 <td></td>
 <td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
-</tr>
-<tr>
-<td>429</td>
-<td>X-REQUESTID</td>
-<td>string</td>
-<td></td>
-<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption</td>
 </tr>
 </tbody></table>
 
@@ -3768,20 +3766,6 @@ X-API-KEY: string
 <span class="p">},</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
 <span class="k">print</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-
-</code></pre><pre class="highlight java tab-java"><code><span class="n">URL</span> <span class="n">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="o">(</span><span class="s">"/visits/journeys/digital"</span><span class="o">);</span>
-<span class="n">HttpURLConnection</span> <span class="n">con</span> <span class="o">=</span> <span class="o">(</span><span class="n">HttpURLConnection</span><span class="o">)</span> <span class="n">obj</span><span class="o">.</span><span class="na">openConnection</span><span class="o">();</span>
-<span class="n">con</span><span class="o">.</span><span class="na">setRequestMethod</span><span class="o">(</span><span class="s">"GET"</span><span class="o">);</span>
-<span class="kt">int</span> <span class="n">responseCode</span> <span class="o">=</span> <span class="n">con</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<span class="n">BufferedReader</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BufferedReader</span><span class="o">(</span>
-    <span class="k">new</span> <span class="nf">InputStreamReader</span><span class="o">(</span><span class="n">con</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">()));</span>
-<span class="n">String</span> <span class="n">inputLine</span><span class="o">;</span>
-<span class="n">StringBuffer</span> <span class="n">response</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuffer</span><span class="o">();</span>
-<span class="k">while</span> <span class="o">((</span><span class="n">inputLine</span> <span class="o">=</span> <span class="n">in</span><span class="o">.</span><span class="na">readLine</span><span class="o">())</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">response</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="n">inputLine</span><span class="o">);</span>
-<span class="o">}</span>
-<span class="n">in</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">response</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
 
 </code></pre>
 <p><code>GET /visits/journeys/digital</code></p>
@@ -3976,7 +3960,7 @@ X-API-KEY: string
 <td>200</td>
 <td><a href="https://tools.ietf.org/html/rfc7231#section-6.3.1">OK</a></td>
 <td>list of insights as specified in the results parameter</td>
-<td><a href="#schemainline_response_200_11">inline_response_200_11</a></td>
+<td><a href="#tocSinline_response_200_11">Digital Journey Insights Response Data</a></td>
 </tr>
 <tr>
 <td>400</td>
@@ -4015,7 +3999,7 @@ X-API-KEY: string
 <td>Value indicating the number of credits consumed to serve the request</td>
 </tr>
 <tr>
-<td>400</td>
+<td>200,400,401,429</td>
 <td>X-REQUESTID</td>
 <td>string</td>
 <td></td>
@@ -4028,19 +4012,12 @@ X-API-KEY: string
 <td></td>
 <td>The WWW-Authenticate header is sent along with a 401 Unauthorized response</td>
 </tr>
-<tr>
-<td>429</td>
-<td>X-REQUESTID</td>
-<td>string</td>
-<td></td>
-<td>An unique TruFactor request ID per API request. Use this for debugging and tracking credit consumption</td>
-</tr>
 </tbody></table>
 
 <!--<aside class="success">
 This operation does not require authentication
 </aside>-->
-<h1 id='metadata-apis'>MetaData APIs</h1><h1 id='entities'>Entities</h1>
+<h1 id='metadata-apis'>MetaData APIs</h1><h1 id='core-entities'>Core Entities</h1>
 <h2 id="tocSplace">Place</h2>
 
 <p><a id="schemaplace"></a></p>
@@ -4134,45 +4111,263 @@ This operation does not require authentication
 </tr>
 <tr>
 <td>brands</td>
-<td>[<a href="#schemaplace_brands">Brands</a>]</td>
+<td><a href="#tocSplace_brands">Brands</a></td>
 <td>false</td>
 <td>none</td>
 <td>List of brands that this place is associated with.</td>
 </tr>
 <tr>
 <td>business</td>
-<td><a href="#schemaplace_business">Business</a></td>
+<td><a href="#tocSplace_business">Business</a></td>
 <td>false</td>
 <td>none</td>
 <td>The business that own this place or a tenant operating out of this place</td>
 </tr>
 <tr>
 <td>categories</td>
-<td>[<a href="#schemaplace_categories">Categories</a>]</td>
+<td><a href="#tocSplace_categories">Categories</a></td>
 <td>false</td>
 <td>none</td>
 <td>The Trufactor categories associated with this place</td>
 </tr>
 <tr>
 <td>contact</td>
-<td><a href="#schemacontact">Contact</a></td>
+<td><a href="#tocScontact">Contact</a></td>
 <td>false</td>
 <td>none</td>
 <td>Object representing various contact attributes such as phone, mobile and email addresses.</td>
 </tr>
 <tr>
 <td>address</td>
-<td><a href="#schemaaddress">Address</a></td>
+<td><a href="#tocSaddress">Address</a></td>
 <td>false</td>
 <td>none</td>
 <td>Object representing various address attributes of the place such as street, county, city, state and country.</td>
 </tr>
 <tr>
 <td>geo</td>
-<td><a href="#schemageo">Geo</a></td>
+<td><a href="#tocSgeo">Geo</a></td>
 <td>false</td>
 <td>none</td>
 <td>Object representing a point or a bounded region (i.e Polygon)</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSplace_brands">Brands</h2>
+
+<p><a id="schemaplace_brands"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"59b6675b-660f-44c3-93e7-1c031758fb15"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Toyota"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/brands/59b6675b-660f-44c3-93e7-1c031758fb15"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='properties-3'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>An unique TruFactor identifier of the brand</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Name of the brand</td>
+</tr>
+<tr>
+<td>link</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Hypermedia link to fetch the details of the brand</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSplace_business">Business</h2>
+
+<p><a id="schemaplace_business"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"McDonalds"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/businesses/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p><em>The business that own this place or a tenant operating out of this place</em></p>
+<h3 id='properties-4'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string(uuid)</td>
+<td>false</td>
+<td>none</td>
+<td>An unique Trufactor identifier of the business</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Name of the business</td>
+</tr>
+<tr>
+<td>link</td>
+<td>string(uri)</td>
+<td>false</td>
+<td>none</td>
+<td>Hypermedia link to fetch the details of the business</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSplace_categories">Categories</h2>
+
+<p><a id="schemaplace_categories"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"152f84ff-1f88-4e04-a406-d1bd4358105b"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shopping mall"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/categories/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='properties-5'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string(uuid)</td>
+<td>false</td>
+<td>none</td>
+<td>An unique Trufactor identifier of the caetegory</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Name of the category</td>
+</tr>
+<tr>
+<td>link</td>
+<td>string(url)</td>
+<td>false</td>
+<td>none</td>
+<td>Hypermedia link to fetch the details of the category</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSstore">Store</h2>
+
+<p><a id="schemastore"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cvs pharmacy"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">9832</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">8904</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"percentile"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='properties-6'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>link</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Hypermedia link to fetch the details of the store</td>
+</tr>
+<tr>
+<td>visits_count</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>unique_users_count</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>percentile</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-12'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>percentile</td>
+<td>25</td>
+</tr>
+<tr>
+<td>percentile</td>
+<td>50</td>
+</tr>
+<tr>
+<td>percentile</td>
+<td>75</td>
+</tr>
+<tr>
+<td>percentile</td>
+<td>90</td>
 </tr>
 </tbody></table>
 
@@ -4196,7 +4391,7 @@ This operation does not require authentication
 
 </span></code></pre>
 <p><em>Object representing various contact attributes such as phone, mobile and email addresses.</em></p>
-<h3 id='properties-3'>Properties</h3>
+<h3 id='properties-7'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4208,7 +4403,7 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>phone</td>
-<td>[string]</td>
+<td>string</td>
 <td>false</td>
 <td>none</td>
 <td>List of phone numbers</td>
@@ -4222,14 +4417,14 @@ This operation does not require authentication
 </tr>
 <tr>
 <td>email</td>
-<td>[string]</td>
+<td>string</td>
 <td>false</td>
 <td>none</td>
 <td>List of email addresses</td>
 </tr>
 <tr>
 <td>www</td>
-<td>[string]</td>
+<td>string</td>
 <td>false</td>
 <td>none</td>
 <td>List of web sites</td>
@@ -4254,7 +4449,7 @@ This operation does not require authentication
 
 </span></code></pre>
 <p><em>Object representing various address attributes of the place such as street, county, city, state and country.</em></p>
-<h3 id='properties-4'>Properties</h3>
+<h3 id='properties-8'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4348,7 +4543,7 @@ This operation does not require authentication
 
 </span></code></pre>
 <p><em>Object representing a point or a bounded region (i.e Polygon)</em></p>
-<h3 id='properties-5'>Properties</h3>
+<h3 id='properties-9'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4387,7 +4582,7 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>» <em>anonymous</em></td>
-<td><a href="#schemapoint">Point</a></td>
+<td><a href="#tocSpoint">Point</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -4407,13 +4602,13 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>» <em>anonymous</em></td>
-<td><a href="#schemapolygon">Polygon</a></td>
+<td><a href="#tocSpolygon">Polygon</a></td>
 <td>false</td>
 <td>none</td>
 <td>Describes a polygon i.e a list of longitude and latitude co-ordinates representing a bounded region</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-12'>Enumerated Values</h4>
+<h4 id='enumerated-values-13'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -4437,7 +4632,7 @@ This operation does not require authentication
   </span><span class="mi">0</span><span class="w">
 </span><span class="p">]</span><span class="w">
 
-</span></code></pre><h3 id='properties-6'>Properties</h3>
+</span></code></pre><h3 id='properties-10'>Properties</h3>
 <p><em>None</em></p>
 
 <h2 id="tocSpolygon">Polygon</h2>
@@ -4456,9 +4651,9 @@ This operation does not require authentication
 
 </span></code></pre>
 <p><em>Describes a polygon i.e a list of longitude and latitude co-ordinates representing a bounded region</em></p>
-<h3 id='properties-7'>Properties</h3>
+<h3 id='properties-11'>Properties</h3>
 <p><em>None</em></p>
-<h3 id='properties-8'>Properties</h3>
+<h3 id='properties-12'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4470,277 +4665,100 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>error</td>
-<td><a href="#schemaOn_Failure">On Failure</a></td>
+<td><a href="#tocSOn_Failure">On Failure</a></td>
 <td>false</td>
 <td>none</td>
 <td>Response will contain this object only when HTTP status code is 400.</td>
 </tr>
 </tbody></table>
 
-<h2 id="tocSboundary">boundary</h2>
+<!--
+<h2 id="tocSboundary">Boundary</h2>
 
-<p><a id="schemaboundary"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mi">0</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<a id="schemaboundary"></a>
 
-</span></code></pre>
+```json
+{
+  "coordinates": [
+    0
+  ]
+}
+
+```
+-->
+
+<!--
 <h2 id="tocSinline_response_200_2_data">inline_response_200_2_data</h2>
 
-<p><a id="schemainline_response_200_2_data"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"percentile"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2933</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1023</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<a id="schemainline_response_200_2_data"></a>
 
-</span></code></pre><h3 id='properties-9'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>percentile</td>
-<td>number(int64)</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>visits_count</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>Total number of users that visited the place falling in to the percentile</td>
-</tr>
-<tr>
-<td>unique_users_count</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>Total number of unique users that visited the place falling in to the percentile</td>
-</tr>
-</tbody></table>
-<h4 id='enumerated-values-13'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>percentile</td>
-<td>25</td>
-</tr>
-<tr>
-<td>percentile</td>
-<td>50</td>
-</tr>
-<tr>
-<td>percentile</td>
-<td>75</td>
-</tr>
-<tr>
-<td>percentile</td>
-<td>90</td>
-</tr>
-</tbody></table>
+```json
+{
+  "percentile": 25,
+  "visits_count": 2933,
+  "unique_users_count": 1023
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|percentile|number(int64)|false|none|none|
+|visits_count|number|false|none|Total number of users that visited the place falling in to the percentile|
+|unique_users_count|number|false|none|Total number of unique users that visited the place falling in to the percentile|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|percentile|25|
+|percentile|50|
+|percentile|75|
+|percentile|90|
 
 <h2 id="tocSinline_response_200_2">inline_response_200_2</h2>
 
-<p><a id="schemainline_response_200_2"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"percentile"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2933</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1023</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"percentile"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">3432</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">809</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"percentile"</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">234</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">92</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<a id="schemainline_response_200_2"></a>
 
-</span></code></pre><h3 id='properties-10'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>data</td>
-<td>[<a href="#schemainline_response_200_2_data">inline_response_200_2_data</a>]</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-</tbody></table>
-<h3 id='properties-11'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>coordinates</td>
-<td>[number]</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-</tbody></table>
+```json
+{
+  "data": [
+    {
+      "percentile": 25,
+      "visits_count": 2933,
+      "unique_users_count": 1023
+    },
+    {
+      "percentile": 50,
+      "visits_count": 3432,
+      "unique_users_count": 809
+    },
+    {
+      "percentile": 75,
+      "visits_count": 234,
+      "unique_users_count": 92
+    }
+  ]
+}
 
-<h2 id="tocSplace_brands">Brands</h2>
+```
 
-<p><a id="schemaplace_brands"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"59b6675b-660f-44c3-93e7-1c031758fb15"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Toyota"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/brands/59b6675b-660f-44c3-93e7-1c031758fb15"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+### Properties
 
-</span></code></pre><h3 id='properties-12'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>An unique TruFactor identifier of the brand</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>Name of the brand</td>
-</tr>
-<tr>
-<td>link</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>Hypermedia link to fetch the details of the brand</td>
-</tr>
-</tbody></table>
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[[inline_response_200_2_data](#schemainline_response_200_2_data)]|false|none|none
 
-<h2 id="tocSplace_business">Business</h2>
+### Properties
 
-<p><a id="schemaplace_business"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"McDonalds"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/businesses/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|coordinates|[number]|false|none|none|
 
-</span></code></pre>
-<p><em>The business that own this place or a tenant operating out of this place</em></p>
-<h3 id='properties-13'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>string(uuid)</td>
-<td>false</td>
-<td>none</td>
-<td>An unique Trufactor identifier of the business</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>Name of the business</td>
-</tr>
-<tr>
-<td>link</td>
-<td>string(uri)</td>
-<td>false</td>
-<td>none</td>
-<td>Hypermedia link to fetch the details of the business</td>
-</tr>
-</tbody></table>
-
-<h2 id="tocSplace_categories">Categories</h2>
-
-<p><a id="schemaplace_categories"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"152f84ff-1f88-4e04-a406-d1bd4358105b"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Shopping mall"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.trufactor.com/categories/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre><h3 id='properties-14'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>string(uuid)</td>
-<td>false</td>
-<td>none</td>
-<td>An unique Trufactor identifier of the caetegory</td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>Name of the category</td>
-</tr>
-<tr>
-<td>link</td>
-<td>string(url)</td>
-<td>false</td>
-<td>none</td>
-<td>Hypermedia link to fetch the details of the category</td>
-</tr>
-</tbody></table>
-
+-->
+<h1 id='response-data-entities'>Response Data Entities</h1>
 <h2 id="tocSinline_response_200_1_data_summary">Summary Data</h2>
 
 <p><a id="schemainline_response_200_1_data_summary"></a></p>
@@ -4749,7 +4767,7 @@ This operation does not require authentication
   </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">132445</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-15'>Properties</h3>
+</span></code></pre><h3 id='properties-13'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4783,7 +4801,7 @@ This operation does not require authentication
   </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-16'>Properties</h3>
+</span></code></pre><h3 id='properties-14'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4821,7 +4839,7 @@ This operation does not require authentication
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-17'>Properties</h3>
+</span></code></pre><h3 id='properties-15'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4847,185 +4865,75 @@ This operation does not require authentication
 </tr>
 <tr>
 <td>error_metrics</td>
-<td><a href="#schemainline_response_200_1_data_extrapolated_summary_error_metrics">inline_response_200_1_data_extrapolated_summary_error_metrics</a></td>
+<td><a href="#tocSinline_response_200_1_data_extrapolated_summary_error_metrics">Extrapolated Summary Error Metrics</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 </tbody></table>
 
+<!--
 <h2 id="tocSinline_response_200_1_data">Summary Data</h2>
 
-<p><a id="schemainline_response_200_1_data"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">302140</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">132445</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"extrapolated_summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">6002140</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">121254</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"error_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.3</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<a id="schemainline_response_200_1_data"></a>
 
-</span></code></pre><h3 id='properties-18'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>summary</td>
-<td><a href="#schemainline_response_200_1_data_summary">inline_response_200_1_data_summary</a></td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>extrapolated_summary</td>
-<td><a href="#schemainline_response_200_1_data_extrapolated_summary">inline_response_200_1_data_extrapolated_summary</a></td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-</tbody></table>
+```json
+{
+  "summary": {
+    "visits_count": 302140,
+    "unique_users_count": 132445
+  },
+  "extrapolated_summary": {
+    "visits_count": 6002140,
+    "unique_users_count": 121254,
+    "error_metrics": {
+      "visits_count": 1.3,
+      "unique_users_count": 0.9
+    }
+  }
+}
 
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|summary|[inline_response_200_1_data_summary](#schemainline_response_200_1_data_summary)|false|none|none|
+|extrapolated_summary|[inline_response_200_1_data_extrapolated_summary](#schemainline_response_200_1_data_extrapolated_summary)|false|none|none|
+-->
+
+<!--
 <h2 id="tocSinline_response_200_1">inline_response_200_1</h2>
 
-<p><a id="schemainline_response_200_1"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">302140</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">132445</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"extrapolated_summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">6002140</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">121254</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"error_metrics"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.3</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<a id="schemainline_response_200_1"></a>
 
-</span></code></pre><h3 id='properties-19'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>data</td>
-<td><a href="#schemainline_response_200_1_data">inline_response_200_1_data</a></td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-</tbody></table>
+```json
+{
+  "data": {
+    "summary": {
+      "visits_count": 302140,
+      "unique_users_count": 132445
+    },
+    "extrapolated_summary": {
+      "visits_count": 6002140,
+      "unique_users_count": 121254,
+      "error_metrics": {
+        "visits_count": 1.3,
+        "unique_users_count": 0.9
+      }
+    }
+  }
+}
 
-<h2 id="tocSstore">Store</h2>
+```
 
-<p><a id="schemastore"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"store_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cvs pharmacy"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">9832</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">8904</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"percentile"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="w">
-</span><span class="p">}</span><span class="w">
+### Properties
 
-</span></code></pre><h3 id='properties-20'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>store_id</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>store_display_name</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>link</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>Hypermedia link to fetch the details of the store</td>
-</tr>
-<tr>
-<td>visits_count</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>unique_users_count</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>percentile</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-</tbody></table>
-<h4 id='enumerated-values-14'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>percentile</td>
-<td>25</td>
-</tr>
-<tr>
-<td>percentile</td>
-<td>50</td>
-</tr>
-<tr>
-<td>percentile</td>
-<td>75</td>
-</tr>
-<tr>
-<td>percentile</td>
-<td>90</td>
-</tr>
-</tbody></table>
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|data|[inline_response_200_1_data](#schemainline_response_200_1_data)|false|none|none|
+-->
 
 <h2 id="tocSinline_response_200_3">Top Stores By Visits Data</h2>
 
@@ -5033,8 +4941,8 @@ This operation does not require authentication
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"store_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cvs pharmacy"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cvs pharmacy"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.trufactor.io/store/bfc2c04e-3db7-4f80-9b80-7167746d02a1"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"visits_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">9832</span><span class="p">,</span><span class="w">
       </span><span class="s2">"unique_users_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">8904</span><span class="p">,</span><span class="w">
@@ -5044,7 +4952,7 @@ This operation does not require authentication
   </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-21'>Properties</h3>
+</span></code></pre><h3 id='properties-16'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5056,7 +4964,7 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>[<a href="#schemastore">store</a>]</td>
+<td><a href="#tocSstore">store</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -5105,7 +5013,7 @@ This operation does not require authentication
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-22'>Properties</h3>
+</span></code></pre><h3 id='properties-17'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5117,7 +5025,7 @@ This operation does not require authentication
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>[<a href="#tocSinline_response_200_4_data">Demography Data</a>]</td>
+<td><a href="#tocSinline_response_200_4_data">Demography Data</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -5155,7 +5063,7 @@ This operation does not require authentication
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-23'>Properties</h3>
+</span></code></pre><h3 id='properties-18'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5174,28 +5082,28 @@ This operation does not require authentication
 </tr>
 <tr>
 <td>gender</td>
-<td>[<a href="#tocSinline_response_200_4_gender">Gender Data</a>]</td>
+<td><a href="#tocSinline_response_200_4_gender">Gender Data</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
 <td>age_group</td>
-<td>[<a href="#tocSinline_response_200_4_age_group">Age Group Data</a>]</td>
+<td><a href="#tocSinline_response_200_4_age_group">Age Group Data</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
 <td>income_group</td>
-<td>[<a href="#tocSinline_response_200_4_income_group">Income Group Data</a>]</td>
+<td><a href="#tocSinline_response_200_4_income_group">Income Group Data</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
 </tr>
 <tr>
 <td>ethnicity</td>
-<td>[<a href="#tocSinline_response_200_4_ethnicity">Ethnicity Data</a>]</td>
+<td><a href="#tocSinline_response_200_4_ethnicity">Ethnicity Data</a></td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -5210,7 +5118,7 @@ This operation does not require authentication
   </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">23.1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-24'>Properties</h3>
+</span></code></pre><h3 id='properties-19'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5235,7 +5143,7 @@ This operation does not require authentication
 <td>the number returned is in percentage</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-15'>Enumerated Values</h4>
+<h4 id='enumerated-values-14'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -5268,7 +5176,7 @@ This operation does not require authentication
   </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">13.1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-25'>Properties</h3>
+</span></code></pre><h3 id='properties-20'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5293,7 +5201,7 @@ This operation does not require authentication
 <td>the number returned is in percentage</td>
 </tr>
 </tbody></table>
-<h4 id='enumerated-values-16'>Enumerated Values</h4>
+<h4 id='enumerated-values-15'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -5330,7 +5238,57 @@ This operation does not require authentication
   </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">13.1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-26'>Properties</h3>
+</span></code></pre><h3 id='properties-21'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>value</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>the number returned is in percentage</td>
+</tr>
+</tbody></table>
+<h4 id='enumerated-values-16'>Enumerated Values</h4>
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Value</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>0-25000</td>
+</tr>
+<tr>
+<td>type</td>
+<td>25000-100000</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSinline_response_200_4_ethnicity">Ethnicity</h2>
+
+<p><a id="schemainline_response_200_4_ethnicity"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asian"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">13.1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='properties-22'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5356,56 +5314,6 @@ This operation does not require authentication
 </tr>
 </tbody></table>
 <h4 id='enumerated-values-17'>Enumerated Values</h4>
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Value</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>type</td>
-<td>0-25000</td>
-</tr>
-<tr>
-<td>type</td>
-<td>25000-100000</td>
-</tr>
-</tbody></table>
-
-<h2 id="tocSinline_response_200_4_ethnicity">Ethnicity</h2>
-
-<p><a id="schemainline_response_200_4_ethnicity"></a></p>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"asian"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">13.1</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre><h3 id='properties-27'>Properties</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Restrictions</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>false</td>
-<td>none</td>
-<td>none</td>
-</tr>
-<tr>
-<td>value</td>
-<td>number</td>
-<td>false</td>
-<td>none</td>
-<td>the number returned is in percentage</td>
-</tr>
-</tbody></table>
-<h4 id='enumerated-values-18'>Enumerated Values</h4>
 <table><thead>
 <tr>
 <th>Property</th>
@@ -5446,7 +5354,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">40.9</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-28'>Properties</h3>
+</span></code></pre><h3 id='properties-23'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5552,7 +5460,7 @@ This operation does not require authentication
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-29'>Properties</h3>
+</span></code></pre><h3 id='properties-24'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5581,7 +5489,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">39.1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-30'>Properties</h3>
+</span></code></pre><h3 id='properties-25'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5635,7 +5543,7 @@ This operation does not require authentication
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-31'>Properties</h3>
+</span></code></pre><h3 id='properties-26'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5662,7 +5570,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-32'>Properties</h3>
+</span></code></pre><h3 id='properties-27'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5696,7 +5604,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-33'>Properties</h3>
+</span></code></pre><h3 id='properties-28'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5730,7 +5638,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-34'>Properties</h3>
+</span></code></pre><h3 id='properties-29'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5786,7 +5694,7 @@ This operation does not require authentication
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-35'>Properties</h3>
+</span></code></pre><h3 id='properties-30'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5831,7 +5739,7 @@ This operation does not require authentication
 <p><a id="schemainline_response_200_7"></a></p>
 <pre class="highlight json tab-json"><code><span class="s2">"{</span><span class="se">\"</span><span class="s2">data</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">by_home_census_block_group</span><span class="se">\"</span><span class="s2">:[{</span><span class="se">\"</span><span class="s2">block_group_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">101001</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:47.3}],</span><span class="se">\"</span><span class="s2">by_work_census_block_group</span><span class="se">\"</span><span class="s2">:[{</span><span class="se">\"</span><span class="s2">block_group_id</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">101002</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:40.1}],</span><span class="se">\"</span><span class="s2">by_distance_between_home_and_place</span><span class="se">\"</span><span class="s2">:[{</span><span class="se">\"</span><span class="s2">radius_in_miles</span><span class="se">\"</span><span class="s2">:5,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:0},{</span><span class="se">\"</span><span class="s2">radius_in_miles</span><span class="se">\"</span><span class="s2">:15,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:0},{</span><span class="se">\"</span><span class="s2">radius_in_miles</span><span class="se">\"</span><span class="s2">:25,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:0}],</span><span class="se">\"</span><span class="s2">by_time_between_home_and_place</span><span class="se">\"</span><span class="s2">:[{</span><span class="se">\"</span><span class="s2">time_range</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">5-15</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:12.4},{</span><span class="se">\"</span><span class="s2">time_range</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">15-30</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:21.4},{</span><span class="se">\"</span><span class="s2">time_range</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">30-45</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:28.1},{</span><span class="se">\"</span><span class="s2">time_range</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">45-60</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:20.4},{</span><span class="se">\"</span><span class="s2">time_range</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">&gt; 60</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">users_in_percentage</span><span class="se">\"</span><span class="s2">:11.4}]}}"</span><span class="w">
 
-</span></code></pre><h3 id='properties-36'>Properties</h3>
+</span></code></pre><h3 id='properties-31'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5858,7 +5766,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-37'>Properties</h3>
+</span></code></pre><h3 id='properties-32'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5892,7 +5800,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-38'>Properties</h3>
+</span></code></pre><h3 id='properties-33'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5926,7 +5834,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-39'>Properties</h3>
+</span></code></pre><h3 id='properties-34'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5960,7 +5868,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-40'>Properties</h3>
+</span></code></pre><h3 id='properties-35'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6016,7 +5924,7 @@ This operation does not require authentication
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-41'>Properties</h3>
+</span></code></pre><h3 id='properties-36'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6088,7 +5996,7 @@ This operation does not require authentication
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-42'>Properties</h3>
+</span></code></pre><h3 id='properties-37'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6116,7 +6024,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-43'>Properties</h3>
+</span></code></pre><h3 id='properties-38'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6159,7 +6067,7 @@ This operation does not require authentication
   </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-44'>Properties</h3>
+</span></code></pre><h3 id='properties-39'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6220,7 +6128,7 @@ This operation does not require authentication
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-45'>Properties</h3>
+</span></code></pre><h3 id='properties-40'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6239,7 +6147,7 @@ This operation does not require authentication
 </tr>
 <tr>
 <td>top_visited_pois</td>
-<td>[<a href="#schemainline_response_200_9_data_top_visited_pois">Top Visited POIs Data</a>]</td>
+<td>[<a href="#tocSinline_response_200_9_data_top_visited_pois">Top Visited POIs Data</a>]</td>
 <td>false</td>
 <td>none</td>
 <td>none</td>
@@ -6269,7 +6177,7 @@ This operation does not require authentication
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='properties-46'>Properties</h3>
+</span></code></pre><h3 id='properties-41'>Properties</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6287,6 +6195,330 @@ This operation does not require authentication
 <td>none</td>
 </tr>
 </tbody></table>
+
+<h2 id="tocSinline_response_200_10_before">Category Visited Data</h2>
+
+<p><a id="schemainline_response_200_10_before"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"category_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='properties-42'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>category_id</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Category ID</td>
+</tr>
+<tr>
+<td>category_name</td>
+<td>string</td>
+<td>false</td>
+<td>none</td>
+<td>Category name of the place visited before visiting this place</td>
+</tr>
+<tr>
+<td>users_in_percentage</td>
+<td>number</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSinline_response_200_10_data">Physical Journey Insights Data</h2>
+
+<p><a id="schemainline_response_200_10_data"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"before"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"category_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"category_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='properties-43'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>before</td>
+<td>[<a href="#tocSinline_response_200_10_before">Categories Visited Before Data</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>after</td>
+<td>[<a href="#tocSinline_response_200_10_before">Categories Visited After Data</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSinline_response_200_10">Physical Journey Summary Response Data</h2>
+
+<p><a id="schemainline_response_200_10"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"before"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"category_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"category_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='properties-44'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>[<a href="#tocSinline_response_200_10_data">Physical Journey Insights Data</a>]</td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSinline_response_200_11_data">Digital Journey Data</h2>
+
+<p><a id="schemainline_response_200_11_data"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"app_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"app_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"app_publisher_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ios_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"android_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"before"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"app_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"app_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"app_publisher_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ios_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"android_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"app_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"app_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"app_publisher_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ios_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"android_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='properties-45'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>at</td>
+<td><a href="#tocSinline_response_200_5_data">Apps Used At The Store Data</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>before</td>
+<td><a href="#tocSinline_response_200_5_data">Apps Used Before Visiting The Store Data</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+<tr>
+<td>after</td>
+<td><a href="#tocSinline_response_200_5_data">Apps Used After Visiting The Store Data</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<h2 id="tocSinline_response_200_11">Digital Journey Insights Response Data</h2>
+
+<p><a id="schemainline_response_200_11"></a></p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"at"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"app_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"app_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"app_publisher_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ios_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"android_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"before"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"app_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"app_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"app_publisher_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ios_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"android_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"after"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"category_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"app_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"app_display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"app_publisher_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ios_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"android_link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"users_in_percentage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='properties-46'>Properties</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Restrictions</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td><a href="#tocSinline_response_200_11_data">Digital Journey Insights Data</a></td>
+<td>false</td>
+<td>none</td>
+<td>none</td>
+</tr>
+</tbody></table>
+
+<!-- 
+<h2 id="tocSplace_brands">Place_brands</h2>
+
+<a id="schemaplace_brands"></a>
+
+```json
+{
+  "id": "59b6675b-660f-44c3-93e7-1c031758fb15",
+  "name": "Toyota",
+  "link": "https://api.trufactor.com/brands/59b6675b-660f-44c3-93e7-1c031758fb15"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string|false|none|An unique TruFactor identifier of the brand|
+|name|string|false|none|Name of the brand|
+|link|string|false|none|Hypermedia link to fetch the details of the brand|
+
+<h2 id="tocSplace_business">Place_business</h2>
+
+<a id="schemaplace_business"></a>
+
+```json
+{
+  "id": "eb3698d4-a27c-4d93-9f48-fb4355c0e63c",
+  "name": "McDonalds",
+  "link": "https://api.trufactor.com/businesses/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"
+}
+
+```
+
+*The business that own this place or a tenant operating out of this place*
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string(uuid)|false|none|An unique Trufactor identifier of the business|
+|name|string|false|none|Name of the business|
+|link|string(uri)|false|none|Hypermedia link to fetch the details of the business|
+
+<h2 id="tocSplace_categories">Place_categories</h2>
+
+<a id="schemaplace_categories"></a>
+
+```json
+{
+  "id": "152f84ff-1f88-4e04-a406-d1bd4358105b",
+  "name": "Shopping mall",
+  "link": "https://api.trufactor.com/categories/eb3698d4-a27c-4d93-9f48-fb4355c0e63c"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|string(uuid)|false|none|An unique Trufactor identifier of the caetegory|
+|name|string|false|none|Name of the category|
+|link|string(url)|false|none|Hypermedia link to fetch the details of the category|
+-->
 <h1 id='errors'>Errors</h1>
 <p>TruFactor IaaS APIs use the following error codes:</p>
 
